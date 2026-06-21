@@ -31,7 +31,7 @@ public class ConvertTypeRequest
 
     internal void Exception(Exception exception)
     {
-        ArgumentNullException.ThrowIfNull(exception);
+        Throw.IfNull(exception);
 
         _exceptions ??= new();
         _exceptions.Add(exception);

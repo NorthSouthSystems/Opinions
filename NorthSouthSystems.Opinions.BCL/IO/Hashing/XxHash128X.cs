@@ -28,8 +28,8 @@ public static class XxHash128X
 
     public static void Append(this XxHash128 hasher, string value)
     {
-        ArgumentNullException.ThrowIfNull(hasher);
-        ArgumentNullException.ThrowIfNull(value);
+        Throw.IfNull(hasher);
+        Throw.IfNull(value);
 
         // This line results in 0 bytes for string.Empty, which does not cause the hash to change.
         // Since we don't allow null values, this will not allow the hash to distinguish between

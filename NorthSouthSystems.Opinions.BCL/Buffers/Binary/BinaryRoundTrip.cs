@@ -53,43 +53,34 @@ public static class BinaryRoundTrip
 
     public static bool ReadBool(ReadOnlySpan<byte> bytes)
     {
-        ArgumentOutOfRangeException.ThrowIfZero(bytes.Length);
+        Throw.IfZero(bytes.Length);
         return bytes[0] > 0;
     }
 
-    public static void WriteBool(bool value, Action<ReadOnlySpan<byte>> writer)
-    {
-        ArgumentNullException.ThrowIfNull(writer);
-        writer([value ? (byte)1 : (byte)0]);
-    }
+    public static void WriteBool(bool value, Action<ReadOnlySpan<byte>> writer) =>
+        Throw.IfNull(writer)([value ? (byte)1 : (byte)0]);
 
     // byte
 
     public static byte ReadByte(ReadOnlySpan<byte> bytes)
     {
-        ArgumentOutOfRangeException.ThrowIfZero(bytes.Length);
+        Throw.IfZero(bytes.Length);
         return bytes[0];
     }
 
-    public static void WriteByte(byte value, Action<ReadOnlySpan<byte>> writer)
-    {
-        ArgumentNullException.ThrowIfNull(writer);
-        writer([value]);
-    }
+    public static void WriteByte(byte value, Action<ReadOnlySpan<byte>> writer) =>
+        Throw.IfNull(writer)([value]);
 
     // sbyte
 
     public static sbyte ReadSByte(ReadOnlySpan<byte> bytes)
     {
-        ArgumentOutOfRangeException.ThrowIfZero(bytes.Length);
+        Throw.IfZero(bytes.Length);
         return unchecked((sbyte)bytes[0]);
     }
 
-    public static void WriteSByte(sbyte value, Action<ReadOnlySpan<byte>> writer)
-    {
-        ArgumentNullException.ThrowIfNull(writer);
-        writer([(byte)value]);
-    }
+    public static void WriteSByte(sbyte value, Action<ReadOnlySpan<byte>> writer) =>
+        Throw.IfNull(writer)([(byte)value]);
 
     // short
 
@@ -98,7 +89,7 @@ public static class BinaryRoundTrip
 
     public static void WriteShort(short value, Action<ReadOnlySpan<byte>> writer)
     {
-        ArgumentNullException.ThrowIfNull(writer);
+        Throw.IfNull(writer);
         Span<byte> bytes = stackalloc byte[2];
         BinaryPrimitives.WriteInt16LittleEndian(bytes, value);
         writer(bytes);
@@ -111,7 +102,7 @@ public static class BinaryRoundTrip
 
     public static void WriteUShort(ushort value, Action<ReadOnlySpan<byte>> writer)
     {
-        ArgumentNullException.ThrowIfNull(writer);
+        Throw.IfNull(writer);
         Span<byte> bytes = stackalloc byte[2];
         BinaryPrimitives.WriteUInt16LittleEndian(bytes, value);
         writer(bytes);
@@ -124,7 +115,7 @@ public static class BinaryRoundTrip
 
     public static void WriteInt(int value, Action<ReadOnlySpan<byte>> writer)
     {
-        ArgumentNullException.ThrowIfNull(writer);
+        Throw.IfNull(writer);
         Span<byte> bytes = stackalloc byte[4];
         BinaryPrimitives.WriteInt32LittleEndian(bytes, value);
         writer(bytes);
@@ -137,7 +128,7 @@ public static class BinaryRoundTrip
 
     public static void WriteUInt(uint value, Action<ReadOnlySpan<byte>> writer)
     {
-        ArgumentNullException.ThrowIfNull(writer);
+        Throw.IfNull(writer);
         Span<byte> bytes = stackalloc byte[4];
         BinaryPrimitives.WriteUInt32LittleEndian(bytes, value);
         writer(bytes);
@@ -150,7 +141,7 @@ public static class BinaryRoundTrip
 
     public static void WriteLong(long value, Action<ReadOnlySpan<byte>> writer)
     {
-        ArgumentNullException.ThrowIfNull(writer);
+        Throw.IfNull(writer);
         Span<byte> bytes = stackalloc byte[8];
         BinaryPrimitives.WriteInt64LittleEndian(bytes, value);
         writer(bytes);
@@ -163,7 +154,7 @@ public static class BinaryRoundTrip
 
     public static void WriteULong(ulong value, Action<ReadOnlySpan<byte>> writer)
     {
-        ArgumentNullException.ThrowIfNull(writer);
+        Throw.IfNull(writer);
         Span<byte> bytes = stackalloc byte[8];
         BinaryPrimitives.WriteUInt64LittleEndian(bytes, value);
         writer(bytes);
@@ -186,15 +177,15 @@ public static class BinaryRoundTrip
             BinaryPrimitives.ReadInt32LittleEndian(bytes.Slice(0, 4)),
             BinaryPrimitives.ReadInt32LittleEndian(bytes.Slice(4, 4)),
             BinaryPrimitives.ReadInt32LittleEndian(bytes.Slice(8, 4)),
-            BinaryPrimitives.ReadInt32LittleEndian(bytes.Slice(12, 4)),
+            BinaryPrimitives.ReadInt32LittleEndian(bytes.Slice(12, 4))
         ];
 
-        return new decimal(parts);
+        return new(parts);
     }
 
     public static void WriteDecimal(decimal value, Action<ReadOnlySpan<byte>> writer)
     {
-        ArgumentNullException.ThrowIfNull(writer);
+        Throw.IfNull(writer);
 
         Span<int> parts = stackalloc int[4];
         if (decimal.GetBits(value, parts) != 4)
@@ -214,10 +205,8 @@ public static class BinaryRoundTrip
     public static string ReadString(ReadOnlySpan<byte> bytes) =>
         Encoding.UTF8.GetString(bytes);
 
-    public static void WriteString(string value, Action<ReadOnlySpan<byte>> writer)
-    {
-        ArgumentNullException.ThrowIfNull(value);
-        ArgumentNullException.ThrowIfNull(writer);
-        writer(Encoding.UTF8.GetBytes(value));
-    }
+    public static void WriteString(string value, Action<ReadOnlySpan<byte>> writer) =>
+        Throw.IfNull(writer)(
+            Encoding.UTF8.GetBytes(
+                Throw.IfNull(value)));
 }

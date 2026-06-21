@@ -6,7 +6,7 @@ public static class CultureInfoX
 {
     public static void WithCulture(string name, Action action)
     {
-        ArgumentNullException.ThrowIfNull(action);
+        Throw.IfNull(action);
 
         var currentCulture = CultureInfo.CurrentCulture;
 

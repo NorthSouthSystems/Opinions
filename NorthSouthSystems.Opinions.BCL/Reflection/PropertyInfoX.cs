@@ -12,7 +12,7 @@ public static class PropertyInfoX
 
     public static object GetValueCompiled(object obj, string propertyPath, bool includeNonPublic = false)
     {
-        ArgumentNullException.ThrowIfNull(obj);
+        Throw.IfNull(obj);
 
         var getter = GetGetterCompiled(obj.GetType(), propertyPath, includeNonPublic);
 
@@ -21,8 +21,8 @@ public static class PropertyInfoX
 
     public static Func<object, object> GetGetterCompiled(Type type, string propertyPath, bool includeNonPublic = false)
     {
-        ArgumentNullException.ThrowIfNull(type);
-        ArgumentException.ThrowIfNullOrEmpty(propertyPath);
+        Throw.IfNull(type);
+        Throw.IfNullOrEmpty(propertyPath);
 
         if (type.IsValueType)
             throw new ArgumentException("Value types are not allowed.", nameof(type));
@@ -35,10 +35,10 @@ public static class PropertyInfoX
 
     public static Type GetGetterReturnTypeOrThrow(Type objType, string propertyPath, bool includeNonPublic = false)
     {
-        ArgumentNullException.ThrowIfNull(objType);
-        ArgumentException.ThrowIfNullOrEmpty(propertyPath);
+        Throw.IfNull(objType);
+        Throw.IfNullOrEmpty(propertyPath);
 
-        var propertyPathSegments = SplitPropertyPath(propertyPath);
+        string[] propertyPathSegments = SplitPropertyPath(propertyPath);
 
         var currentType = objType;
 
@@ -54,8 +54,8 @@ public static class PropertyInfoX
 
     public static MethodInfo GetGetterMethodOrThrow(Type objType, string propertyName, bool includeNonPublic = false)
     {
-        ArgumentNullException.ThrowIfNull(objType);
-        ArgumentException.ThrowIfNullOrEmpty(propertyName);
+        Throw.IfNull(objType);
+        Throw.IfNullOrEmpty(propertyName);
 
         var flattenFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy;
         var declaredFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly;
@@ -80,7 +80,7 @@ public static class PropertyInfoX
 
     private static Func<object, object> CompileGetter(GetterCacheKey key)
     {
-        var propertyPathSegments = SplitPropertyPath(key.PropertyPath);
+        string[] propertyPathSegments = SplitPropertyPath(key.PropertyPath);
 
         var objParameter = Expression.Parameter(typeof(object));
 

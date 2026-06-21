@@ -7,7 +7,7 @@ public static class XElementSimpleStreamer
 {
     /// <summary>
     /// Provides a simple (primitive) way to stream XElements from an XmlReader.
-    /// 
+    ///
     /// Code adapted from: http://blogs.msdn.com/xmlteam/archive/2007/03/24/streaming-with-linq-to-xml-part-2.aspx.
     /// </summary>
     /// <param name="reader">An XmlReader created using one of the many XmlReader.Create overloads.</param>
@@ -15,13 +15,8 @@ public static class XElementSimpleStreamer
     /// When any element is found in the source xml document, if the element's name matches the elementName
     /// parameter, that element is read into an XElement and yielded into the enumeration.
     /// </param>
-    public static IEnumerable<XElement> Stream(XmlReader reader, XName elementName)
-    {
-        ArgumentNullException.ThrowIfNull(reader);
-        ArgumentNullException.ThrowIfNull(elementName);
-
-        return StreamIterator(reader, elementName);
-    }
+    public static IEnumerable<XElement> Stream(XmlReader reader, XName elementName) =>
+        StreamIterator(Throw.IfNull(reader), Throw.IfNull(elementName));
 
     private static IEnumerable<XElement> StreamIterator(XmlReader reader, XName elementName)
     {
@@ -39,9 +34,9 @@ public static class XElementSimpleStreamer
                 && XName.Get(reader.LocalName, reader.NamespaceURI) == elementName)
             {
                 yield return (XElement)XNode.ReadFrom(reader);
+
                 yielded = true;
             }
-        }
-        while (yielded || reader.Read());
+        } while (yielded || reader.Read());
     }
 }
