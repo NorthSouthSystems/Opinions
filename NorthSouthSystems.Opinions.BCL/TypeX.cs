@@ -1,5 +1,4 @@
-﻿using System.Collections.Immutable;
-using System.Numerics;
+﻿using System.Numerics;
 using System.Runtime.CompilerServices;
 
 namespace NorthSouthSystems;
@@ -10,9 +9,6 @@ public static class TypeX
         Throw.IfNull(type).IsValueType
             ? RuntimeHelpers.GetUninitializedObject(type)
             : null;
-
-    public static bool IsGenericNullable(this Type type) => Nullable.GetUnderlyingType(type) != null;
-    public static Type FlattenGenericNullable(this Type type) => Nullable.GetUnderlyingType(type) ?? type;
 
     // Unfortunately, there is no simpler method to determine this. All Systems.Numerics interfaces
     // are recursive generics (i.e. IInterface<T> where T : IInterface<T>), so they can't be used
@@ -86,4 +82,37 @@ public static class TypeX
                 [typeof(object)] = "object"
             }
             .ToImmutableDictionary();
+
+    public static bool IsGenericNullable(this Type type) => Nullable.GetUnderlyingType(type) != null;
+    public static Type FlattenGenericNullable(this Type type) => Nullable.GetUnderlyingType(type) ?? type;
+
+    public static bool IsSubTypeOfGeneric(this Type type, Type genericTypeDefinition) =>
+        GetSubTypeOfGeneric(type, genericTypeDefinition) is not null;
+
+    public static Type? GetSubTypeOfGeneric(this Type type, Type genericTypeDefinition)
+    {
+        Throw.IfNull(type);
+
+        if (!Throw.IfNull(genericTypeDefinition).IsGenericTypeDefinition)
+            throw new ArgumentException("Must be a generic type definition.", nameof(genericTypeDefinition));
+
+        var types = genericTypeDefinition.IsInterface
+            ? type.GetInterfaces()
+            : SelfAndBaseTypes(type);
+
+        return types.SingleOrDefault(t => t.IsGenericType && t.GetGenericTypeDefinition() == genericTypeDefinition);
+    }
+
+    public static IEnumerable<Type> SelfAndBaseTypes(Type? t)
+    {
+        while (true)
+        {
+            if (t is null)
+                yield break;
+
+            yield return t;
+
+            t = t.BaseType;
+        }
+    }
 }
