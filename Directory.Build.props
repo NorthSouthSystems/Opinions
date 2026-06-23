@@ -4,8 +4,16 @@
 
     <ItemGroup>
         <Using Include="System"/>
+        <Using Include="System.Collections"/>
         <Using Include="System.Collections.Generic"/>
+        <Using Include="System.Collections.Immutable"/>
+        <Using Include="System.Globalization"/>
         <Using Include="System.Linq"/>
+        <Using Include="System.Text"/>
+        <Using Include="System.Threading"/>
+        <Using Include="System.Threading.Tasks"/>
+        <!-- Statics -->
+        <Using Include="System.Globalization.CultureInfo" Static="true"/>
     </ItemGroup>
 
 </Project>

@@ -31,7 +31,7 @@ public static class ArgumentExceptionX
 
             if (messageIncludeIndices)
             {
-                message.Append(index++.ToString(CultureInfo.InvariantCulture));
+                message.Append(index++.ToString(InvariantCulture));
                 message.Append(": ");
             }
 

@@ -39,7 +39,7 @@ public class ConvertTypeRequest
 
     internal Exception ExceptionToThrow()
     {
-        string message = string.Create(CultureInfo.InvariantCulture, $"{Value?.GetType().FullName} : {ConversionType.FullName}");
+        string message = string.Create(InvariantCulture, $"{Value?.GetType().FullName} : {ConversionType.FullName}");
 
         if (_exceptions == null)
             return new NotSupportedException(message);

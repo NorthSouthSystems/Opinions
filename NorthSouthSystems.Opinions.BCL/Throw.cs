@@ -176,7 +176,7 @@ public static class Throw
     private static void ComparerTEnumThrow<TEnum>(TEnum value, TEnum other, string? paramName, string inverseOperatorFriendlyName)
         where TEnum : struct, Enum =>
         throw new ArgumentOutOfRangeException(paramName, value,
-            string.Create(CultureInfo.InvariantCulture, $"{paramName} ('{value}') must be {inverseOperatorFriendlyName} '{other}'."));
+            string.Create(InvariantCulture, $"{paramName} ('{value}') must be {inverseOperatorFriendlyName} '{other}'."));
 
     #endregion
 
@@ -212,7 +212,7 @@ public static class Throw
     private static void BetweenHelperThrow<T>(T value, T leftInclusive, T rightInclusive, string? paramName, bool isBetweenThrows)
         where T : IComparable<T> =>
         throw new ArgumentOutOfRangeException(paramName, value,
-            string.Create(CultureInfo.InvariantCulture, $"{paramName} ('{value}') must {(isBetweenThrows ? "not " : string.Empty)}be between '{leftInclusive}' and '{rightInclusive}' inclusively."));
+            string.Create(InvariantCulture, $"{paramName} ('{value}') must {(isBetweenThrows ? "not " : string.Empty)}be between '{leftInclusive}' and '{rightInclusive}' inclusively."));
 
     #endregion
 
@@ -247,7 +247,7 @@ public static class Throw
     private static void BetweenEnumHelperThrow<TEnum>(TEnum value, TEnum leftInclusive, TEnum rightInclusive, string? paramName, bool isBetweenThrows)
         where TEnum : struct, Enum =>
         throw new ArgumentOutOfRangeException(paramName, value,
-            string.Create(CultureInfo.InvariantCulture, $"{paramName} ('{value}') must {(isBetweenThrows ? "not " : string.Empty)}be between '{leftInclusive}' and '{rightInclusive}' inclusively."));
+            string.Create(InvariantCulture, $"{paramName} ('{value}') must {(isBetweenThrows ? "not " : string.Empty)}be between '{leftInclusive}' and '{rightInclusive}' inclusively."));
 
     #endregion
 }
