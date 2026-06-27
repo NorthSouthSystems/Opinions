@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>This .NET library contains opinionated value objects for working with Microsoft.EntityFrameworkCore + SqlServer.</Description>
+        <!-- TODO: CS1573 - Fully document all params for documented methods. -->
+        <!-- TODO: CS1591 - Fully document all publicly visible members. -->
+        <NoWarn>CS1573,CS1591</NoWarn>
+
+        <!-- Vogen's default IsInitialized validations cause headaches with Entity Framework Core, and solving them -->
+        <!-- is not worth the trouble (leaking EF Core into Domain; extra property initializers; ... and more). -->
+        <DefineConstants>$(DefineConstants);VOGEN_NO_VALIDATION</DefineConstants>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\NorthSouthSystems.Opinions.BCL\NorthSouthSystems.Opinions.BCL.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- PolyType is required so that Vogen will emit [TypeShape(Marshaler = typeof(PolyTypeMarshaler))] and a -->
+        <!-- PolyTypeMarshaler for each ValueObject. -->
+        <PackageReference Include="PolyType"/>
+        <PackageReference Include="Vogen" PrivateAssets="analyzers;build;buildTransitive;contentFiles"/>
+    </ItemGroup>
+
+</Project>

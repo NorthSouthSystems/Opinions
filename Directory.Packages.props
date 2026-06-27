@@ -2,19 +2,41 @@
     <PropertyGroup>
         <CentralPackageTransitivePinningEnabled>true</CentralPackageTransitivePinningEnabled>
         <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+
+        <DotNetVersion>10.0.9</DotNetVersion>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageVersion Include="CsCheck" Version="4.4.1"/>
         <PackageVersion Include="FluentValidation" Version="12.1.1"/>
         <PackageVersion Include="MemoryPack" Version="1.21.4"/>
-        <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.9"/>
+        <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(DotNetVersion)"/>
+        <PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="$(DotNetVersion)"/>
+        <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="$(DotNetVersion)"/>
+        <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="$(DotNetVersion)"/>
+        <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(DotNetVersion)"/>
         <PackageVersion Include="morelinq" Version="4.4.0"/>
+        <PackageVersion Include="Nerdbank.MessagePack" Version="1.2.30"/>
+        <PackageVersion Include="NorthSouthSystems.MessagePackable" Version="1.1.1-beta"/>
         <PackageVersion Include="NorthSouthSystems.Text" Version="8.0.1"/>
+        <PackageVersion Include="PolyType" Version="1.3.1"/>
         <PackageVersion Include="Scrutor" Version="7.0.0"/>
-        <PackageVersion Include="System.IO.Hashing" Version="10.0.0"/>
+        <PackageVersion Include="System.IO.Hashing" Version="$(DotNetVersion)"/>
+        <PackageVersion Include="Vogen" Version="8.0.5"/>
+
+        <!-- Microsoft.EntityFrameworkCore.SqlServer -->
+        <!-- Most of its dependencies should version in lockstep; however, these do not. -->
+        <PackageVersion Include="Microsoft.Data.SqlClient" Version="7.0.1"/>
+        <!-- Microsoft.Data.SqlClient has a slew of dependencies; we are only pinning the "problematic". -->
+        <PackageVersion Include="Azure.Core" Version="1.58.0"/>
+        <PackageVersion Include="Azure.Identity" Version="1.21.0"/>
+        <PackageVersion Include="Microsoft.Identity.Client" Version="4.83.3"/>
+        <PackageVersion Include="Microsoft.Identity.Client.Extensions.Msal" Version="4.83.3"/>
+
+        <!-- Nerdbank.MessagePack -->
+        <PackageVersion Include="Microsoft.NET.StringTools" Version="18.7.1"/>
 
         <!-- Scrutor -->
-        <PackageVersion Include="Microsoft.Extensions.DependencyModel" Version="10.0.9"/>
+        <PackageVersion Include="Microsoft.Extensions.DependencyModel" Version="$(DotNetVersion)"/>
     </ItemGroup>
 </Project>

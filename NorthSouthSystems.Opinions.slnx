@@ -1,24 +1,29 @@
 <Solution>
     <Folder Name="/_/">
-        <File Path=".editorconfig" />
-        <File Path=".github/workflows/BuildTestAnalyze.yml" />
-        <File Path=".github/workflows/BuildTestPackagePublish.yml" />
-        <File Path=".gitignore" />
-        <File Path="Directory.Build.props" />
-        <File Path="Directory.Packages.props" />
-        <File Path="Icon.png" />
-        <File Path="LICENSE" />
-        <File Path="nuget.config" />
-        <File Path="README.md" />
-        <File Path="version.json" />
+        <File Path=".editorconfig"/>
+        <File Path=".github/workflows/BuildTestAnalyze.yml"/>
+        <File Path=".github/workflows/BuildTestPackagePublish.yml"/>
+        <File Path=".gitignore"/>
+        <File Path="Directory.Build.props"/>
+        <File Path="Directory.Packages.props"/>
+        <File Path="Icon.png"/>
+        <File Path="LICENSE"/>
+        <File Path="nuget.config"/>
+        <File Path="README.md"/>
+        <File Path="version.json"/>
     </Folder>
-    <Project Path="NorthSouthSystems.Opinions.BCL.Benchmarks/NorthSouthSystems.Opinions.BCL.Benchmarks.csproj" />
-    <Project Path="NorthSouthSystems.Opinions.BCL.Tests/NorthSouthSystems.Opinions.BCL.Tests.csproj" />
-    <Project Path="NorthSouthSystems.Opinions.BCL/NorthSouthSystems.Opinions.BCL.csproj" />
-    <Project Path="NorthSouthSystems.Opinions.FluentValidation.Tests/NorthSouthSystems.Opinions.FluentValidation.Tests.csproj" />
-    <Project Path="NorthSouthSystems.Opinions.FluentValidation/NorthSouthSystems.Opinions.FluentValidation.csproj" />
-    <Project Path="NorthSouthSystems.Opinions.Scrutor.Tests/NorthSouthSystems.Opinions.Scrutor.Tests.csproj" />
-    <Project Path="NorthSouthSystems.Opinions.Scrutor/NorthSouthSystems.Opinions.Scrutor.csproj" />
-    <Project Path="NorthSouthSystems.Opinions.StackExchange.Tests/NorthSouthSystems.Opinions.StackExchange.Tests.csproj" />
-    <Project Path="NorthSouthSystems.Opinions.StackExchange/NorthSouthSystems.Opinions.StackExchange.csproj" />
+    <Project Path="NorthSouthSystems.Opinions.BCL.Benchmarks/NorthSouthSystems.Opinions.BCL.Benchmarks.csproj"/>
+    <Project Path="NorthSouthSystems.Opinions.BCL.Tests/NorthSouthSystems.Opinions.BCL.Tests.csproj"/>
+    <Project Path="NorthSouthSystems.Opinions.BCL/NorthSouthSystems.Opinions.BCL.csproj"/>
+    <Project Path="NorthSouthSystems.Opinions.Entities.Tests/NorthSouthSystems.Opinions.Entities.Tests.csproj"/>
+    <Project Path="NorthSouthSystems.Opinions.Entities.Vogen/NorthSouthSystems.Opinions.Entities.Vogen.csproj"/>
+    <Project Path="NorthSouthSystems.Opinions.Entities/NorthSouthSystems.Opinions.Entities.csproj"/>
+    <Project
+        Path="NorthSouthSystems.Opinions.FluentValidation.Tests/NorthSouthSystems.Opinions.FluentValidation.Tests.csproj"/>
+    <Project Path="NorthSouthSystems.Opinions.FluentValidation/NorthSouthSystems.Opinions.FluentValidation.csproj"/>
+    <Project Path="NorthSouthSystems.Opinions.Scrutor.Tests/NorthSouthSystems.Opinions.Scrutor.Tests.csproj"/>
+    <Project Path="NorthSouthSystems.Opinions.Scrutor/NorthSouthSystems.Opinions.Scrutor.csproj"/>
+    <Project
+        Path="NorthSouthSystems.Opinions.StackExchange.Tests/NorthSouthSystems.Opinions.StackExchange.Tests.csproj"/>
+    <Project Path="NorthSouthSystems.Opinions.StackExchange/NorthSouthSystems.Opinions.StackExchange.csproj"/>
 </Solution>

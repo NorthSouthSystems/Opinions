@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>This .NET library contains opinionated adapters, extensions, and helper classes for working with Microsoft.EntityFrameworkCore + SqlServer.</Description>
+        <!-- TODO: CS1573 - Fully document all params for documented methods. -->
+        <!-- TODO: CS1591 - Fully document all publicly visible members. -->
+        <NoWarn>CS1573,CS1591</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentValidation"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer"/>
+        <PackageReference Include="Microsoft.Extensions.Caching.Memory"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
+        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions"/>
+        <PackageReference Include="Nerdbank.MessagePack"/>
+        <PackageReference Include="NorthSouthSystems.MessagePackable"/>
+        <PackageReference Include="Scrutor"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\NorthSouthSystems.Opinions.BCL\NorthSouthSystems.Opinions.BCL.csproj"/>
+        <ProjectReference Include="..\NorthSouthSystems.Opinions.Entities.Vogen\NorthSouthSystems.Opinions.Entities.Vogen.csproj"/>
+        <ProjectReference Include="..\NorthSouthSystems.Opinions.FluentValidation\NorthSouthSystems.Opinions.FluentValidation.csproj"/>
+        <ProjectReference Include="..\NorthSouthSystems.Opinions.Scrutor\NorthSouthSystems.Opinions.Scrutor.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="FluentValidation"/>
+        <Using Include="NorthSouthSystems.Collections"/>
+        <Using Include="NorthSouthSystems.Collections.Generic"/>
+        <Using Include="NorthSouthSystems.FluentValidation"/>
+        <Using Include="NorthSouthSystems.Scrutor"/>
+    </ItemGroup>
+
+</Project>

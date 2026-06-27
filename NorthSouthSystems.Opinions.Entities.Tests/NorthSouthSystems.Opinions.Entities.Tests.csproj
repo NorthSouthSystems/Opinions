@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <ProjectReference Include="..\NorthSouthSystems.Opinions.Entities\NorthSouthSystems.Opinions.Entities.csproj"/>
+        <ProjectReference Include="..\NorthSouthSystems.Opinions.Entities.Vogen\NorthSouthSystems.Opinions.Entities.Vogen.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="NorthSouthSystems.Entities"/>
+    </ItemGroup>
+
+</Project>
