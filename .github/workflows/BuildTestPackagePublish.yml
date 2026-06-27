@@ -32,12 +32,16 @@ jobs:
 
             -   run: |
                     dotnet pack --no-build --configuration Release NorthSouthSystems.Opinions.BCL/NorthSouthSystems.Opinions.BCL.csproj
+                    dotnet pack --no-build --configuration Release NorthSouthSystems.Opinions.FluentValidation/NorthSouthSystems.Opinions.FluentValidation.csproj
+                    dotnet pack --no-build --configuration Release NorthSouthSystems.Opinions.Scrutor/NorthSouthSystems.Opinions.Scrutor.csproj
                     dotnet pack --no-build --configuration Release NorthSouthSystems.Opinions.StackExchange/NorthSouthSystems.Opinions.StackExchange.csproj
 
             -   env:
                     NUGET_APIKEY: ${{ secrets.NUGET_APIKEY }}
                 run: |
                     dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key "$NUGET_APIKEY" "NorthSouthSystems.Opinions.BCL/bin/Release/*.nupkg"
+                    dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key "$NUGET_APIKEY" "NorthSouthSystems.Opinions.FluentValidation/bin/Release/*.nupkg"
+                    dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key "$NUGET_APIKEY" "NorthSouthSystems.Opinions.Scrutor/bin/Release/*.nupkg"
                     dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key "$NUGET_APIKEY" "NorthSouthSystems.Opinions.StackExchange/bin/Release/*.nupkg"
 
             -   uses: actions/github-script@v9

@@ -1,5 +1,8 @@
 ﻿using FluentValidation.Results;
 
+// This test class sanity checks the default FluentValidation library's behavior. In order to not bind to our
+// NorthSouthSystems.Opinions.FluentValidation extensions, we invoke FluentValidation methods directly and not via
+// extension syntax. This is 100% necessary because of our global usings in the csproj.
 public class T_FluentValidation_ImmutableArray
 {
     public class WithImmArr
@@ -11,20 +14,19 @@ public class T_FluentValidation_ImmutableArray
     public class WithImmArrNotNullV : AbstractValidator<WithImmArr>
     {
         public WithImmArrNotNullV() =>
-            RuleFor(x => x.ImmArr).NotNull();
+            DefaultValidatorExtensions.NotNull(RuleFor(x => x.ImmArr));
     }
 
     public class WithImmArrNotEmptyV : AbstractValidator<WithImmArr>
     {
         public WithImmArrNotEmptyV() =>
-            RuleFor(x => x.ImmArr).NotEmpty();
+            DefaultValidatorExtensions.NotEmpty(RuleFor(x => x.ImmArr));
     }
 
     public class WithImmArrSafeNotEmptyV : AbstractValidator<WithImmArr>
     {
         public WithImmArrSafeNotEmptyV() =>
-            RuleFor(x => x.ImmArrSafe)
-                .NotEmpty()
+            DefaultValidatorExtensions.NotEmpty(RuleFor(x => x.ImmArrSafe))
                 .OverridePropertyName(x => x.ImmArr);
     }
 
