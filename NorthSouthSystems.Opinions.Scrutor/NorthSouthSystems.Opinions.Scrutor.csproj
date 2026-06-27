@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>This .NET library contains opinionated code for using Scrutor.</Description>
+        <!-- TODO: CS1573 - Fully document all params for documented methods. -->
+        <!-- TODO: CS1591 - Fully document all publicly visible members. -->
+        <NoWarn>CS1573,CS1591</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\NorthSouthSystems.Opinions.BCL\NorthSouthSystems.Opinions.BCL.csproj"/>
+        <ProjectReference Include="..\NorthSouthSystems.Opinions.FluentValidation\NorthSouthSystems.Opinions.FluentValidation.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentValidation"/>
+        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions"/>
+        <PackageReference Include="Scrutor"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="Scrutor"/>
+    </ItemGroup>
+
+</Project>

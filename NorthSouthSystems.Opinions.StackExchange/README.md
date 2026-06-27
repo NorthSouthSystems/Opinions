@@ -1,4 +1,4 @@
-# NorthSouthSystems.StackExchange.Opinions
+# NorthSouthSystems.Opinions.StackExchange
 
 This .NET library contains opinionated code for unzipping and processing Stack Exchange data dumps.
 

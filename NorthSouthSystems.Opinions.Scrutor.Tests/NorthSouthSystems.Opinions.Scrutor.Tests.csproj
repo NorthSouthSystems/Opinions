@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <ProjectReference Include="..\NorthSouthSystems.Opinions.Scrutor\NorthSouthSystems.Opinions.Scrutor.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="NorthSouthSystems.Scrutor"/>
+        <Using Include="Scrutor"/>
+    </ItemGroup>
+
+</Project>

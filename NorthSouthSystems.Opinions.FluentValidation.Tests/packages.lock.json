@@ -45,16 +45,6 @@
           "xunit.v3.mtp-v1": "[3.2.2]"
         }
       },
-      "MemoryPack.Core": {
-        "type": "Transitive",
-        "resolved": "1.21.4",
-        "contentHash": "6RszGorZ0ejNmp37ZcboPBMvvPCuNW2jlrdQfcs/lMzE5b3pmPF6hsm/laDc34hRlbAST1ZxaX/DvYu2DF5sBQ=="
-      },
-      "MemoryPack.Generator": {
-        "type": "Transitive",
-        "resolved": "1.21.4",
-        "contentHash": "g14EsSS85yn0lHTi0J9ivqlZMf09A2iI51fmI+0KkzIzyCbWOBWPi5mdaY7YWmXprk12aYh9u/qfWHQUYthlwg=="
-      },
       "Microsoft.ApplicationInsights": {
         "type": "Transitive",
         "resolved": "2.23.0",
@@ -198,30 +188,19 @@
           "System.IO.Hashing": "[10.0.0, )"
         }
       },
-      "northsouthsystems.opinions.stackexchange": {
+      "northsouthsystems.opinions.fluentvalidation": {
         "type": "Project",
         "dependencies": {
-          "MemoryPack": "[1.21.4, )",
+          "FluentValidation": "[12.1.1, )",
           "NorthSouthSystems.Opinions.BCL": "[1.0.0, )",
-          "NorthSouthSystems.Text": "[8.0.1, )",
-          "morelinq": "[4.4.0, )"
+          "NorthSouthSystems.Text": "[8.0.1, )"
         }
       },
-      "MemoryPack": {
+      "FluentValidation": {
         "type": "CentralTransitive",
-        "requested": "[1.21.4, )",
-        "resolved": "1.21.4",
-        "contentHash": "wy3JTBNBsO8LfQcBvvYsWr3lm2Oakolrfu0UQ3oSJSEiD+7ye0GUhYTaXuYYBowqsXBXWD9gf2218ae0JRiYVQ==",
-        "dependencies": {
-          "MemoryPack.Core": "1.21.4",
-          "MemoryPack.Generator": "1.21.4"
-        }
-      },
-      "morelinq": {
-        "type": "CentralTransitive",
-        "requested": "[4.4.0, )",
-        "resolved": "4.4.0",
-        "contentHash": "QX3bsK9oFeUXk8tFsc9NkI6NnCr8Ar/ex027p+ZZ/jdLCdX2RlryDtxUqZW5j45NVwn4E4Z4hzupsoMQd6Yxtg=="
+        "requested": "[12.1.1, )",
+        "resolved": "12.1.1",
+        "contentHash": "EPpkIe1yh1a0OXyC100oOA8WMbZvqUu5plwhvYcb7oSELfyUZzfxV48BLhvs3kKo4NwG7MGLNgy1RJiYtT8Dpw=="
       },
       "System.IO.Hashing": {
         "type": "CentralTransitive",

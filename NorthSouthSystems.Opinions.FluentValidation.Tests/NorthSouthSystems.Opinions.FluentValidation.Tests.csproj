@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <ProjectReference Include="..\NorthSouthSystems.Opinions.FluentValidation\NorthSouthSystems.Opinions.FluentValidation.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="FluentValidation"/>
+        <Using Include="NorthSouthSystems.FluentValidation"/>
+    </ItemGroup>
+
+</Project>

@@ -1,15 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-        <PackageReference Include="CsCheck" />
+        <PackageReference Include="CsCheck"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\NorthSouthSystems.Opinions.BCL\NorthSouthSystems.Opinions.BCL.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Using Include="NorthSouthSystems" />
+        <ProjectReference Include="..\NorthSouthSystems.Opinions.BCL\NorthSouthSystems.Opinions.BCL.csproj"/>
     </ItemGroup>
 
 </Project>
