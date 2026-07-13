@@ -83,9 +83,9 @@
       },
       "Nerdbank.MessagePack": {
         "type": "Direct",
-        "requested": "[1.2.30, )",
-        "resolved": "1.2.30",
-        "contentHash": "tvHbuhME0PB5Q/A/J5/boPUPoW35RIiCWTLBom6x/wHRBLgAxG03xWEtxBCYBw6xfYfWM/YXF5jF6FuqR5/uIQ==",
+        "requested": "[1.2.36, )",
+        "resolved": "1.2.36",
+        "contentHash": "kws2NFTV1rLbkQL1O91H0cyi0chVQMquagx4yywAg4dquFp0JJB41NJS9M39YFFoHO4yxa/IbRqBLFhLoWHuDQ==",
         "dependencies": {
           "Microsoft.VisualStudio.Validation": "17.13.22",
           "PolyType": "1.3.1"
@@ -364,7 +364,7 @@
           "NorthSouthSystems.Opinions.BCL": "[1.0.0, )",
           "NorthSouthSystems.Text": "[8.0.1, )",
           "PolyType": "[1.3.1, )",
-          "Vogen": "[8.0.5, )"
+          "Vogen": "[8.0.6, )"
         }
       },
       "northsouthsystems.opinions.fluentvalidation": {
@@ -424,9 +424,9 @@
       },
       "Vogen": {
         "type": "CentralTransitive",
-        "requested": "[8.0.5, )",
-        "resolved": "8.0.5",
-        "contentHash": "hUGafk0LpUn3ooZNOOczByhVSGqBaI96bCn0DkreSd2bwHGrMfdRoCqNrB4w0/y5bufyYaABqQ8wWBPgx5QdNw=="
+        "requested": "[8.0.6, )",
+        "resolved": "8.0.6",
+        "contentHash": "YJDSaX2JO7yZ8tohWYF2Fy4G/LCoWmdVf/2oaUOip3KUGlUlYY2Vc2+C5VQfSnoopvrvbMT/ty7kEy1FqtyXCA=="
       }
     }
   }
