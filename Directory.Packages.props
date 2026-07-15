@@ -7,15 +7,20 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageVersion Include="AwesomeAssertions" Version="9.4.0"/>
+        <PackageVersion Include="BenchmarkDotNet" Version="0.15.8"/>
         <PackageVersion Include="CsCheck" Version="4.7.0"/>
         <PackageVersion Include="FluentValidation" Version="12.1.1"/>
         <PackageVersion Include="MemoryPack" Version="1.21.4"/>
+        <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.302"/>
         <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(DotNetVersion)"/>
         <PackageVersion Include="Microsoft.Extensions.Caching.Memory" Version="$(DotNetVersion)"/>
         <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="$(DotNetVersion)"/>
         <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="$(DotNetVersion)"/>
         <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="$(DotNetVersion)"/>
+        <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.8.1"/>
         <PackageVersion Include="morelinq" Version="4.4.0"/>
+        <PackageVersion Include="Nerdbank.GitVersioning" Version="3.10.91"/>
         <PackageVersion Include="Nerdbank.MessagePack" Version="1.2.36"/>
         <PackageVersion Include="NorthSouthSystems.MessagePackable" Version="1.1.1-beta"/>
         <PackageVersion Include="NorthSouthSystems.Text" Version="8.0.1"/>
@@ -23,6 +28,8 @@
         <PackageVersion Include="Scrutor" Version="7.0.0"/>
         <PackageVersion Include="System.IO.Hashing" Version="$(DotNetVersion)"/>
         <PackageVersion Include="Vogen" Version="8.0.6"/>
+        <PackageVersion Include="xunit.v3" Version="3.2.2"/>
+        <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5"/>
 
         <!-- Microsoft.EntityFrameworkCore.SqlServer -->
         <!-- Most of its dependencies should version in lockstep; however, these do not. -->
