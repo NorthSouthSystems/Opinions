@@ -22,6 +22,9 @@
     <Project Path="NorthSouthSystems.Opinions.Entities/NorthSouthSystems.Opinions.Entities.csproj" />
     <Project Path="NorthSouthSystems.Opinions.FluentValidation.Tests/NorthSouthSystems.Opinions.FluentValidation.Tests.csproj" />
     <Project Path="NorthSouthSystems.Opinions.FluentValidation/NorthSouthSystems.Opinions.FluentValidation.csproj" />
+    <Project Path="NorthSouthSystems.Opinions.Infra.Abstractions/NorthSouthSystems.Opinions.Infra.Abstractions.csproj" />
+    <Project Path="NorthSouthSystems.Opinions.Infra.Tests/NorthSouthSystems.Opinions.Infra.Tests.csproj" />
+    <Project Path="NorthSouthSystems.Opinions.Infra/NorthSouthSystems.Opinions.Infra.csproj" />
     <Project Path="NorthSouthSystems.Opinions.Scrutor.Tests/NorthSouthSystems.Opinions.Scrutor.Tests.csproj" />
     <Project Path="NorthSouthSystems.Opinions.Scrutor/NorthSouthSystems.Opinions.Scrutor.csproj" />
     <Project Path="NorthSouthSystems.Opinions.StackExchange.Tests/NorthSouthSystems.Opinions.StackExchange.Tests.csproj" />

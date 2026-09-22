@@ -93,13 +93,13 @@
       },
       "NorthSouthSystems.MessagePackable": {
         "type": "Direct",
-        "requested": "[1.1.12-beta, )",
-        "resolved": "1.1.12-beta",
-        "contentHash": "cscs7hwK/IcK2k1N5glQXizUzv80C29dxSrvldUJ/Y9hdEvIe/Snkmw+2pZL1JAW4YtI1sGNFza2eN+4x/CafQ==",
+        "requested": "[1.1.15-beta, )",
+        "resolved": "1.1.15-beta",
+        "contentHash": "xRUilSwSn6xJSs90TAkmVxnUgALv1yQQoq9tjWNn/mW6d+ceH5DrzX6GSKvbZfc43nhzo53VWPGToYR3xvCLlA==",
         "dependencies": {
-          "Nerdbank.MessagePack": "1.3.85",
+          "Nerdbank.MessagePack": "1.3.86",
           "NorthSouthSystems.Text": "8.0.1",
-          "System.IO.Hashing": "10.0.11"
+          "System.IO.Hashing": "10.0.12"
         }
       },
       "NorthSouthSystems.Text": {

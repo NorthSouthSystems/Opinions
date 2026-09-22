@@ -36,6 +36,8 @@ jobs:
                     dotnet pack --no-build --configuration Release NorthSouthSystems.Opinions.Scrutor/NorthSouthSystems.Opinions.Scrutor.csproj
                     dotnet pack --no-build --configuration Release NorthSouthSystems.Opinions.Entities.Vogen/NorthSouthSystems.Opinions.Entities.Vogen.csproj
                     dotnet pack --no-build --configuration Release NorthSouthSystems.Opinions.Entities/NorthSouthSystems.Opinions.Entities.csproj
+                    dotnet pack --no-build --configuration Release NorthSouthSystems.Opinions.Infra.Abstractions/NorthSouthSystems.Opinions.Infra.Abstractions.csproj
+                    dotnet pack --no-build --configuration Release NorthSouthSystems.Opinions.Infra/NorthSouthSystems.Opinions.Infra.csproj
                     dotnet pack --no-build --configuration Release NorthSouthSystems.Opinions.StackExchange/NorthSouthSystems.Opinions.StackExchange.csproj
 
             -   env:
@@ -46,6 +48,8 @@ jobs:
                     dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key "$NUGET_APIKEY" "NorthSouthSystems.Opinions.Scrutor/bin/Release/*.nupkg"
                     dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key "$NUGET_APIKEY" "NorthSouthSystems.Opinions.Entities.Vogen/bin/Release/*.nupkg"
                     dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key "$NUGET_APIKEY" "NorthSouthSystems.Opinions.Entities/bin/Release/*.nupkg"
+                    dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key "$NUGET_APIKEY" "NorthSouthSystems.Opinions.Infra.Abstractions/bin/Release/*.nupkg"
+                    dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key "$NUGET_APIKEY" "NorthSouthSystems.Opinions.Infra/bin/Release/*.nupkg"
                     dotnet nuget push --source https://api.nuget.org/v3/index.json --api-key "$NUGET_APIKEY" "NorthSouthSystems.Opinions.StackExchange/bin/Release/*.nupkg"
 
             -   uses: actions/github-script@v9

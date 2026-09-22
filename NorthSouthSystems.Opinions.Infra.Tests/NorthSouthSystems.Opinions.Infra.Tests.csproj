@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <ProjectReference Include="..\NorthSouthSystems.Opinions.Infra\NorthSouthSystems.Opinions.Infra.csproj"/>
+        <ProjectReference Include="..\NorthSouthSystems.Opinions.Infra.Abstractions\NorthSouthSystems.Opinions.Infra.Abstractions.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="NorthSouthSystems.Infra"/>
+    </ItemGroup>
+
+</Project>

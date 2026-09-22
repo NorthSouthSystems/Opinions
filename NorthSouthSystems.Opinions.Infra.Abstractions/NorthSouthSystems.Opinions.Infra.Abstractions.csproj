@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>This .NET library contains abstractions implemented by NorthSouthSystems.Opinions.Infra.</Description>
+        <!-- TODO: CS1573 - Fully document all params for documented methods. -->
+        <!-- TODO: CS1591 - Fully document all publicly visible members. -->
+        <NoWarn>CS1573,CS1591</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="morelinq"/>
+        <PackageReference Include="NorthSouthSystems.MessagePackable"/>
+        <PackageReference Include="Scrutor"/>
+        <PackageReference Include="System.IO.Hashing"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\NorthSouthSystems.Opinions.Scrutor\NorthSouthSystems.Opinions.Scrutor.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="NorthSouthSystems.Opinions.Infra.Tests"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Using Include="NorthSouthSystems.Scrutor"/>
+    </ItemGroup>
+
+</Project>
