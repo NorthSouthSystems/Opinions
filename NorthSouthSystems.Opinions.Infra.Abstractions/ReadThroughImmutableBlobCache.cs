@@ -7,7 +7,7 @@ namespace NorthSouthSystems.Infra;
 // does not. Whenever we write to IImmutableBlobStorage, we can optionally write to IImmutableBlobCache (it is not
 // required for correctness), and can optionally leverage the IImmutableBlobCache one-call-write-many performance.
 [ScanRegisterSingleton]
-internal sealed class ReadThroughImmutableBlobCache(IImmutableBlobCache blobCache, IImmutableBlobStorage blobStorage)
+public sealed class ReadThroughImmutableBlobCache(IImmutableBlobCache blobCache, IImmutableBlobStorage blobStorage)
 {
     public async Task<IReadOnlyDictionary<UInt128, ImmutableBlobPickled>> ReadThroughAsync(
         ImmutableArray<UInt128> xxHash128s,
