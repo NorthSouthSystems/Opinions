@@ -7,9 +7,12 @@ namespace NorthSouthSystems;
 
 public static class ArgumentExceptionX
 {
-    public static void ThrowIfAny<T>(IEnumerable<T>? enumerable,
-        string? messagePrefix = null, bool messageIncludeIndices = false,
-        string? originalParamName = null, [CallerArgumentExpression(nameof(enumerable))] string? paramName = null)
+    public static void ThrowIfAny<T>(
+        IEnumerable<T>? enumerable,
+        string? messagePrefix = null,
+        bool messageIncludeIndices = false,
+        string? originalParamName = null,
+        [CallerArgumentExpression(nameof(enumerable))] string? paramName = null)
     {
         if (enumerable is null)
             return;
@@ -44,7 +47,9 @@ public static class ArgumentExceptionX
         throw new ArgumentException(message.ToString(), originalParamName ?? paramName);
     }
 
-    public static void ThrowIfDefault<T>([NotNull] T? argument, [CallerArgumentExpression(nameof(argument))] string? paramName = null)
+    public static void ThrowIfDefault<T>(
+        [NotNull] T? argument,
+        [CallerArgumentExpression(nameof(argument))] string? paramName = null)
         where T : struct
     {
         if (argument is null)
@@ -53,7 +58,9 @@ public static class ArgumentExceptionX
         ThrowIfDefault(argument.Value, paramName);
     }
 
-    public static void ThrowIfDefault<T>(T argument, [CallerArgumentExpression(nameof(argument))] string? paramName = null)
+    public static void ThrowIfDefault<T>(
+        T argument,
+        [CallerArgumentExpression(nameof(argument))] string? paramName = null)
         where T : struct
     {
         if (argument.Equals(default(T)))

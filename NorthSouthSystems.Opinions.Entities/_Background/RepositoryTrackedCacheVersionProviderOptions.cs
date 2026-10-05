@@ -10,8 +10,5 @@ public sealed class RepositoryTrackedCacheVersionProviderOptions
 public sealed class RepositoryTrackedCacheVersionProviderOptionsValidator
     : AbstractValidator<RepositoryTrackedCacheVersionProviderOptions>
 {
-    public RepositoryTrackedCacheVersionProviderOptionsValidator()
-    {
-        RuleFor(x => x.PollingDelay).NotEmpty();
-    }
+    public RepositoryTrackedCacheVersionProviderOptionsValidator() { RuleFor(x => x.PollingDelay).NotEmpty(); }
 }

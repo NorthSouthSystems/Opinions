@@ -39,7 +39,8 @@ public class ConvertXRequest
     {
         bool genericNullable = ConversionTypeAllowsNull && ConversionTypeFlattened.IsValueType;
 
-        string conversionTypeName = string.Create(InvariantCulture,
+        string conversionTypeName = string.Create(
+            InvariantCulture,
             $"{(genericNullable ? "System.Nullable<" : string.Empty)}{ConversionTypeFlattened.FullName}{(genericNullable ? ">" : string.Empty)}");
 
         string message = string.Create(InvariantCulture, $"{Value?.GetType().FullName} : {conversionTypeName}");

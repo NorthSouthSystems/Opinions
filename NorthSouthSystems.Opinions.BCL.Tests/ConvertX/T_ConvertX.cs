@@ -57,13 +57,19 @@ public class T_ConvertX
         string value = "foobar";
 
         act = () => ConvertX.Default.ConvertType<int>(value);
-        act.Should().ThrowExactly<AggregateException>().WithInnerExceptionExactly<ArgumentException>().WithInnerExceptionExactly<FormatException>();
+        act.Should()
+            .ThrowExactly<AggregateException>()
+            .WithInnerExceptionExactly<ArgumentException>()
+            .WithInnerExceptionExactly<FormatException>();
 
         act = () => ConvertX.Default.ConvertType<int>(value, throwIntermediateExceptions: true);
         act.Should().ThrowExactly<ArgumentException>().WithInnerExceptionExactly<FormatException>();
 
         act = () => ConvertX.Default.ConvertType(value, typeof(int));
-        act.Should().ThrowExactly<AggregateException>().WithInnerExceptionExactly<ArgumentException>().WithInnerExceptionExactly<FormatException>();
+        act.Should()
+            .ThrowExactly<AggregateException>()
+            .WithInnerExceptionExactly<ArgumentException>()
+            .WithInnerExceptionExactly<FormatException>();
 
         act = () => ConvertX.Default.ConvertType(value, typeof(int), throwIntermediateExceptions: true);
         act.Should().ThrowExactly<ArgumentException>().WithInnerExceptionExactly<FormatException>();
@@ -83,21 +89,33 @@ public class T_ConvertX
         // This is technically not using the "DefaultTypeConverters" because there is no way to generate an
         // AggregateException when doing so. To generate an AggregateException, we have SystemConvertTypeConverter
         // execute twice.
-        var convertX = new ConvertX(ConvertX.DefaultConverters.Append(new SystemTypeConverterConvertXer()).Append(new SystemConvertConvertXer()));
+        var convertX =
+            new ConvertX(
+                ConvertX.DefaultConverters
+                    .Append(new SystemTypeConverterConvertXer())
+                    .Append(new SystemConvertConvertXer()));
 
         Action act;
         string value = "foobar";
 
         act = () => convertX.ConvertType<int>(value);
         act.Should().ThrowExactly<AggregateException>().And.InnerExceptions.Select(ie => ie.GetType()).Should()
-            .Equal(typeof(ArgumentException), typeof(FormatException), typeof(ArgumentException), typeof(FormatException));
+            .Equal(
+                typeof(ArgumentException),
+                typeof(FormatException),
+                typeof(ArgumentException),
+                typeof(FormatException));
 
         act = () => convertX.ConvertType<int>(value, throwIntermediateExceptions: true);
         act.Should().ThrowExactly<ArgumentException>().WithInnerExceptionExactly<FormatException>();
 
         act = () => convertX.ConvertType(value, typeof(int));
         act.Should().ThrowExactly<AggregateException>().And.InnerExceptions.Select(ie => ie.GetType()).Should()
-            .Equal(typeof(ArgumentException), typeof(FormatException), typeof(ArgumentException), typeof(FormatException));
+            .Equal(
+                typeof(ArgumentException),
+                typeof(FormatException),
+                typeof(ArgumentException),
+                typeof(FormatException));
 
         act = () => convertX.ConvertType(value, typeof(int), throwIntermediateExceptions: true);
         act.Should().ThrowExactly<ArgumentException>().WithInnerExceptionExactly<FormatException>();

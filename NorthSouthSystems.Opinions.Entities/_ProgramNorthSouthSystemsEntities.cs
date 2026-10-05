@@ -14,7 +14,9 @@ public static class ProgramNorthSouthSystemsEntities
         return services;
     }
 
-    public static async Task InitNorthSouthSystemsEntitiesDefaultsAsync(this IServiceProvider serviceProvider, bool excludeRepository = false)
+    public static async Task InitNorthSouthSystemsEntitiesDefaultsAsync(
+        this IServiceProvider serviceProvider,
+        bool excludeRepository = false)
     {
         if (!excludeRepository)
         {
@@ -22,7 +24,8 @@ public static class ProgramNorthSouthSystemsEntities
             await timeProvider.InitializeAsync().ConfigureAwait(false);
             TimeProviderContext.SetRoot(serviceProvider.GetRequiredService<RepositoryTimeProviderWrapper>());
 
-            var trackedCacheVersionProvider = serviceProvider.GetRequiredService<RepositoryTrackedCacheVersionProvider>();
+            var trackedCacheVersionProvider =
+                serviceProvider.GetRequiredService<RepositoryTrackedCacheVersionProvider>();
             await trackedCacheVersionProvider.InitializeAsync().ConfigureAwait(false);
         }
     }

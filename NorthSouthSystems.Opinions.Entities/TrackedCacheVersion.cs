@@ -13,8 +13,18 @@ public sealed class TrackedCacheVersion : ISaveChangesPermissions, ITrackCreated
     bool ISaveChangesPermissions.AllowDelete => true;
 
     public Created Created { get; private set; }
-    Created ITrackCreated.Created { get => Created; set => Created = value; }
+
+    Created ITrackCreated.Created
+    {
+        get => Created;
+        set => Created = value;
+    }
 
     public Updated Updated { get; private set; }
-    Updated ITrackUpdated.Updated { get => Updated; set => Updated = value; }
+
+    Updated ITrackUpdated.Updated
+    {
+        get => Updated;
+        set => Updated = value;
+    }
 }

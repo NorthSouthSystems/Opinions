@@ -7,7 +7,8 @@ public abstract class AmbientContext<T>
     public static void SetRoot(T t)
     {
         if (_root is not null)
-            throw new NotSupportedException(string.Create(InvariantCulture, $"{nameof(SetRoot)} may only be called once."));
+            throw new NotSupportedException(
+                string.Create(InvariantCulture, $"{nameof(SetRoot)} may only be called once."));
 
         _root = Throw.IfNull(t);
     }
@@ -16,7 +17,9 @@ public abstract class AmbientContext<T>
         CurrentAsyncLocal.Value
         ?? _root
         ?? throw new InvalidOperationException(
-            string.Create(InvariantCulture, $"{nameof(AmbientContext<>)} not initialized. Call {nameof(SetRoot)} during application startup."));
+            string.Create(
+                InvariantCulture,
+                $"{nameof(AmbientContext<>)} not initialized. Call {nameof(SetRoot)} during application startup."));
 
     private static T? _root;
     private static readonly AsyncLocal<T?> CurrentAsyncLocal = new();

@@ -38,7 +38,9 @@ public static class PathX
         return directory;
     }
 
-    public static string GetFullPathRelativeToCallerFilePath(string relativePath, [CallerFilePath] string? callerFilePath = null)
+    public static string GetFullPathRelativeToCallerFilePath(
+        string relativePath,
+        [CallerFilePath] string? callerFilePath = null)
     {
         if (Path.IsPathRooted(Throw.IfNull(relativePath)))
             throw new ArgumentOutOfRangeException(nameof(relativePath));

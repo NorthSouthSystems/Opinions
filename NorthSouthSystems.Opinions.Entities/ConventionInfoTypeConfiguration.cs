@@ -11,6 +11,9 @@ public abstract class ConventionInfoTypeConfiguration<TInfo>(string schema) : IE
         Throw.IfNull(builder);
 
         builder.HasNoKey();
-        builder.ToView(typeof(TInfo).Name.RemoveSuffix("Info", StringComparison.OrdinalIgnoreCase), Throw.IfNullOrWhiteSpace(schema));
+
+        builder.ToView(
+            typeof(TInfo).Name.RemoveSuffix("Info", StringComparison.OrdinalIgnoreCase),
+            Throw.IfNullOrWhiteSpace(schema));
     }
 }

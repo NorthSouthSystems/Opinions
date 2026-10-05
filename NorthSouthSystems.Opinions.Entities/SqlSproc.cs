@@ -8,21 +8,33 @@ namespace NorthSouthSystems.Entities;
 
 public static class SqlSprocExtensions
 {
-    public static IQueryable<TEntity> FromSqlSproc<TEntity>(this DbSet<TEntity> set,
-        string schemaName, string sprocName, params SqlParameter[] parameters)
+    public static IQueryable<TEntity> FromSqlSproc<TEntity>(
+        this DbSet<TEntity> set,
+        string schemaName,
+        string sprocName,
+        params SqlParameter[] parameters)
         where TEntity : class =>
         Sproc(Throw.IfNull(set).FromSqlRaw, schemaName, sprocName, parameters);
 
-    public static IQueryable<TResult> SqlSproc<TResult>(this DatabaseFacade database,
-        string schemaName, string sprocName, params SqlParameter[] parameters) =>
+    public static IQueryable<TResult> SqlSproc<TResult>(
+        this DatabaseFacade database,
+        string schemaName,
+        string sprocName,
+        params SqlParameter[] parameters) =>
         Sproc(Throw.IfNull(database).SqlQueryRaw<TResult>, schemaName, sprocName, parameters);
 
-    public static Task<int> ExecuteSqlSprocAsync(this DatabaseFacade database,
-        string schemaName, string sprocName, params SqlParameter[] parameters) =>
+    public static Task<int> ExecuteSqlSprocAsync(
+        this DatabaseFacade database,
+        string schemaName,
+        string sprocName,
+        params SqlParameter[] parameters) =>
         Sproc(Throw.IfNull(database).ExecuteSqlRawAsync, schemaName, sprocName, parameters);
 
-    private static T Sproc<T>(Func<string, SqlParameter[], T> sqlExecutor,
-        string schemaName, string sprocName, params SqlParameter[] parameters)
+    private static T Sproc<T>(
+        Func<string, SqlParameter[], T> sqlExecutor,
+        string schemaName,
+        string sprocName,
+        params SqlParameter[] parameters)
     {
         Throw.IfNullOrWhiteSpace(schemaName);
         Throw.IfNullOrWhiteSpace(sprocName);
@@ -47,11 +59,15 @@ public static class SqlSprocExtensions
         // GOOD! This syntax results in named sproc argument to parameter matching:
         // GOOD! EXEC [schema].[proc] @Foo = @Foo, @Bar = @Bar OUTPUT
         string inOutParameterArgCsv =
-            string.Join(", ", inOutParameters
-                .Select(p => string.Create(InvariantCulture, $"{p.ParameterName} = {ToSprocArg(p)}")));
+            string.Join(
+                ", ",
+                inOutParameters
+                    .Select(p => string.Create(InvariantCulture, $"{p.ParameterName} = {ToSprocArg(p)}")));
 
         return sqlExecutor(
-            string.Create(InvariantCulture, $"EXEC {returnPrefix} {Bracket(schemaName)}.{Bracket(sprocName)} {inOutParameterArgCsv}"),
+            string.Create(
+                InvariantCulture,
+                $"EXEC {returnPrefix} {Bracket(schemaName)}.{Bracket(sprocName)} {inOutParameterArgCsv}"),
             parameters);
     }
 

@@ -2,7 +2,8 @@
 
 namespace NorthSouthSystems.Entities;
 
-public sealed class TrackedCacheVersionConfiguration() : ConventionEntityTypeConfiguration<TrackedCacheVersion>(Schemas.Shared)
+public sealed class TrackedCacheVersionConfiguration()
+    : ConventionEntityTypeConfiguration<TrackedCacheVersion>(Schemas.Shared)
 {
     public override void Configure(EntityTypeBuilder<TrackedCacheVersion> builder)
     {

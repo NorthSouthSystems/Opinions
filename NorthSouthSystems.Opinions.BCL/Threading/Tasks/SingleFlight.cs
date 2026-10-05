@@ -4,7 +4,8 @@ namespace NorthSouthSystems.Threading.Tasks;
 
 // TODO: Evaluate the AsyncLazy implementations available (there are several, and none are in the BCL) and apply it.
 #pragma warning disable VSTHRD011 // Lazy<Task<T>>.Value can deadlock. Use AsyncLazy<T> instead. (https://microsoft.github.io/vs-threading/analyzers/VSTHRD011.html)
-public sealed class SingleFlight<TKey, TValue> where TKey : notnull
+public sealed class SingleFlight<TKey, TValue>
+    where TKey : notnull
 {
     private readonly ConcurrentDictionary<TKey, Lazy<Task<TValue>>> _inflights = new();
 

@@ -5,7 +5,10 @@ namespace NorthSouthSystems.Entities;
 
 internal sealed class NotSupportedMigrator : IMigrator
 {
-    public string GenerateScript(string? fromMigration = null, string? toMigration = null, MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default) =>
+    public string GenerateScript(
+        string? fromMigration = null,
+        string? toMigration = null,
+        MigrationsSqlGenerationOptions options = MigrationsSqlGenerationOptions.Default) =>
         throw new NotSupportedException();
 
     public bool HasPendingModelChanges() =>

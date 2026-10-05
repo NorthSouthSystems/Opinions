@@ -36,10 +36,16 @@ public class T_ConvertX_Culture
             Action act;
 
             act = () => ConvertX.Default.ConvertType<int>(value, culture);
-            act.Should().ThrowExactly<AggregateException>().WithInnerExceptionExactly<ArgumentException>().WithInnerExceptionExactly<FormatException>();
+            act.Should()
+                .ThrowExactly<AggregateException>()
+                .WithInnerExceptionExactly<ArgumentException>()
+                .WithInnerExceptionExactly<FormatException>();
 
             act = () => ConvertX.Default.ConvertType(value, typeof(int), culture);
-            act.Should().ThrowExactly<AggregateException>().WithInnerExceptionExactly<ArgumentException>().WithInnerExceptionExactly<FormatException>();
+            act.Should()
+                .ThrowExactly<AggregateException>()
+                .WithInnerExceptionExactly<ArgumentException>()
+                .WithInnerExceptionExactly<FormatException>();
 
             int convertedValueInt;
             object convertedValueObject;

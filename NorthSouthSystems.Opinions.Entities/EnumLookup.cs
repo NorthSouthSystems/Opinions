@@ -17,5 +17,10 @@ public sealed class EnumLookup : ISaveChangesPermissions, ITrackCreated
     bool ISaveChangesPermissions.AllowDelete => false;
 
     public Created Created { get; private set; }
-    Created ITrackCreated.Created { get => Created; set => Created = value; }
+
+    Created ITrackCreated.Created
+    {
+        get => Created;
+        set => Created = value;
+    }
 }

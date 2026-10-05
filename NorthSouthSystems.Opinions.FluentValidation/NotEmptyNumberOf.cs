@@ -7,30 +7,39 @@ public static class NotEmptyNumberOfExtensions
 {
     // Common cases
 
-    public static IRuleBuilderOptionsConditions<T, T> ExactlyOneOf<T>(this IRuleBuilder<T, T> rule,
+    public static IRuleBuilderOptionsConditions<T, T> ExactlyOneOf<T>(
+        this IRuleBuilder<T, T> rule,
         params Expression<Func<T, object?>>[] expressions) =>
         ExactlyNumberOf(rule, 1, expressions);
 
-    public static IRuleBuilderOptionsConditions<T, T> AtLeastOneOf<T>(this IRuleBuilder<T, T> rule,
+    public static IRuleBuilderOptionsConditions<T, T> AtLeastOneOf<T>(
+        this IRuleBuilder<T, T> rule,
         params Expression<Func<T, object?>>[] expressions) =>
         AtLeastNumberOf(rule, 1, expressions);
 
-    public static IRuleBuilderOptionsConditions<T, T> AtMostOneOf<T>(this IRuleBuilder<T, T> rule,
+    public static IRuleBuilderOptionsConditions<T, T> AtMostOneOf<T>(
+        this IRuleBuilder<T, T> rule,
         params Expression<Func<T, object?>>[] expressions) =>
         AtMostNumberOf(rule, 1, expressions);
 
     // General cases
 
-    public static IRuleBuilderOptionsConditions<T, T> ExactlyNumberOf<T>(this IRuleBuilder<T, T> rule,
-        int number, params Expression<Func<T, object?>>[] expressions) =>
+    public static IRuleBuilderOptionsConditions<T, T> ExactlyNumberOf<T>(
+        this IRuleBuilder<T, T> rule,
+        int number,
+        params Expression<Func<T, object?>>[] expressions) =>
         NotEmptyNumberOf(rule, NotEmptyNumberOfMode.Exactly, number, expressions);
 
-    public static IRuleBuilderOptionsConditions<T, T> AtLeastNumberOf<T>(this IRuleBuilder<T, T> rule,
-        int number, params Expression<Func<T, object?>>[] expressions) =>
+    public static IRuleBuilderOptionsConditions<T, T> AtLeastNumberOf<T>(
+        this IRuleBuilder<T, T> rule,
+        int number,
+        params Expression<Func<T, object?>>[] expressions) =>
         NotEmptyNumberOf(rule, NotEmptyNumberOfMode.AtLeast, number, expressions);
 
-    public static IRuleBuilderOptionsConditions<T, T> AtMostNumberOf<T>(this IRuleBuilder<T, T> rule,
-        int number, params Expression<Func<T, object?>>[] expressions) =>
+    public static IRuleBuilderOptionsConditions<T, T> AtMostNumberOf<T>(
+        this IRuleBuilder<T, T> rule,
+        int number,
+        params Expression<Func<T, object?>>[] expressions) =>
         NotEmptyNumberOf(rule, NotEmptyNumberOfMode.AtMost, number, expressions);
 
     // Implementation
@@ -42,8 +51,11 @@ public static class NotEmptyNumberOfExtensions
         AtMost
     }
 
-    private static IRuleBuilderOptionsConditions<T, T> NotEmptyNumberOf<T>(IRuleBuilder<T, T> rule,
-        NotEmptyNumberOfMode mode, int number, params Expression<Func<T, object?>>[] expressions)
+    private static IRuleBuilderOptionsConditions<T, T> NotEmptyNumberOf<T>(
+        IRuleBuilder<T, T> rule,
+        NotEmptyNumberOfMode mode,
+        int number,
+        params Expression<Func<T, object?>>[] expressions)
     {
         Throw.IfNull(rule);
         Throw.IfNegative(number);
@@ -72,7 +84,9 @@ public static class NotEmptyNumberOfExtensions
             if (isValid)
                 return;
 
-            string errorMessage = string.Create(InvariantCulture, $"{mode.ToString().SpaceCamelCase()} {number} of {memberNamesCsv} must be non-empty.");
+            string errorMessage = string.Create(
+                InvariantCulture,
+                $"{mode.ToString().SpaceCamelCase()} {number} of {memberNamesCsv} must be non-empty.");
 
             foreach (string memberName in funcs.Select(f => f.Key.MemberName))
                 context.AddFailure(memberName, errorMessage);
@@ -82,6 +96,7 @@ public static class NotEmptyNumberOfExtensions
     private static class FuncCache
     {
         internal record struct CacheKey(Type Type, string MemberName);
+
         private static readonly ConcurrentDictionary<CacheKey, Func<object, object?>> Cache = new();
 
         internal static KeyValuePair<CacheKey, Func<T, object?>> GetOrAdd<T>(Expression<Func<T, object?>> expression)

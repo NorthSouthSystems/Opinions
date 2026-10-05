@@ -15,17 +15,26 @@ namespace NorthSouthSystems;
 
 #region "Derived" interfaces
 
-public interface IByteValueObject<TSelf> : INumberValueObject<TSelf, byte> where TSelf : struct, IByteValueObject<TSelf>;
-public interface IShortValueObject<TSelf> : INumberValueObject<TSelf, short> where TSelf : struct, IShortValueObject<TSelf>;
-public interface IIntValueObject<TSelf> : INumberValueObject<TSelf, int> where TSelf : struct, IIntValueObject<TSelf>;
-public interface ILongValueObject<TSelf> : INumberValueObject<TSelf, long> where TSelf : struct, ILongValueObject<TSelf>;
+public interface IByteValueObject<TSelf> : INumberValueObject<TSelf, byte>
+    where TSelf : struct, IByteValueObject<TSelf>;
 
-public interface IGuidValueObject<TSelf> : IStructValueObject<TSelf, Guid>,
-    IParsable<TSelf>, ISpanParsable<TSelf>, IUtf8SpanParsable<TSelf>
+public interface IShortValueObject<TSelf> : INumberValueObject<TSelf, short>
+    where TSelf : struct, IShortValueObject<TSelf>;
+
+public interface IIntValueObject<TSelf> : INumberValueObject<TSelf, int>
+    where TSelf : struct, IIntValueObject<TSelf>;
+
+public interface ILongValueObject<TSelf> : INumberValueObject<TSelf, long>
+    where TSelf : struct, ILongValueObject<TSelf>;
+
+public interface IGuidValueObject<TSelf>
+    : IStructValueObject<TSelf, Guid>,
+        IParsable<TSelf>, ISpanParsable<TSelf>, IUtf8SpanParsable<TSelf>
     where TSelf : struct, IGuidValueObject<TSelf>;
 
-public interface IStringValueObject<TSelf> : IValueObject<TSelf, string>,
-    IParsable<TSelf> // Vogen bug ISpanParsable<TSelf>? string does not implement IUtf8SpanParsable<TSelf>.
+public interface IStringValueObject<TSelf>
+    : IValueObject<TSelf, string>,
+        IParsable<TSelf> // Vogen bug ISpanParsable<TSelf>? string does not implement IUtf8SpanParsable<TSelf>.
     where TSelf : struct, IStringValueObject<TSelf>;
 
 #endregion
@@ -33,8 +42,9 @@ public interface IStringValueObject<TSelf> : IValueObject<TSelf, string>,
 #region "Base" interfaces
 
 // We artificially limit TValue to structs so that we can use IStructValueObject and therefore Nullable<IStructValueObject>.
-public interface INumberValueObject<TSelf, TValue> : IStructValueObject<TSelf, TValue>,
-    IParsable<TSelf>, ISpanParsable<TSelf>, IUtf8SpanParsable<TSelf>
+public interface INumberValueObject<TSelf, TValue>
+    : IStructValueObject<TSelf, TValue>,
+        IParsable<TSelf>, ISpanParsable<TSelf>, IUtf8SpanParsable<TSelf>
     where TSelf : struct, INumberValueObject<TSelf, TValue>
     where TValue : struct, INumber<TValue>;
 
@@ -72,7 +82,10 @@ public static class ValueObjectFactory<TValueObject, TValue>
             .GetConstructor(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance, [typeof(TValue)]);
 
         if (ctor is null)
-            throw new InvalidOperationException(string.Create(InvariantCulture, $"{typeof(TValueObject).Name}({nameof(TValue)}) constructor must exist."));
+            throw new InvalidOperationException(
+                string.Create(
+                    InvariantCulture,
+                    $"{typeof(TValueObject).Name}({nameof(TValue)}) constructor must exist."));
 
         var valueParam = Expression.Parameter(typeof(TValue), "value");
         var @new = Expression.New(ctor, valueParam);

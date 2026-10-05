@@ -46,10 +46,12 @@ public class T_XElementSimpleStreamer
     }
 
     private static XmlReader Reader(XNamespace ns) =>
-        new XElement("Root",
+        new XElement(
+                "Root",
                 new XElement(ns + "Child", "A"),
                 new XElement(ns + "Child", "B"),
-                new XElement(ns + "Child",
+                new XElement(
+                    ns + "Child",
                     new XElement(ns + "Grandchild", "AA"),
                     new XElement(ns + "Grandchild", "BB")))
             .CreateReader();

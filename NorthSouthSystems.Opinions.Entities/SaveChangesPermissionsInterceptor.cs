@@ -21,7 +21,9 @@ internal sealed class SaveChangesPermissionsInterceptor : SaveChangesInterceptor
     }
 
     public override ValueTask<InterceptionResult<int>> SavingChangesAsync(
-        DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
+        DbContextEventData eventData,
+        InterceptionResult<int> result,
+        CancellationToken cancellationToken = default)
     {
         Validate(eventData.Context);
 
@@ -43,13 +45,19 @@ internal sealed class SaveChangesPermissionsInterceptor : SaveChangesInterceptor
         var violations = changes.Select(change =>
             {
                 if (change.Entity is not ISaveChangesPermissions permissions)
-                    return string.Create(InvariantCulture, $"Entity '{change.Entity.GetType().FullName}' must implement {nameof(ISaveChangesPermissions)}.");
+                    return string.Create(
+                        InvariantCulture,
+                        $"Entity '{change.Entity.GetType().FullName}' must implement {nameof(ISaveChangesPermissions)}.");
 
                 if (change.State == EntityState.Modified && !permissions.AllowModify)
-                    return string.Create(InvariantCulture, $"Entity '{change.Entity.GetType().FullName}' does not {nameof(ISaveChangesPermissions.AllowModify)}.");
+                    return string.Create(
+                        InvariantCulture,
+                        $"Entity '{change.Entity.GetType().FullName}' does not {nameof(ISaveChangesPermissions.AllowModify)}.");
 
                 if (change.State == EntityState.Deleted && !permissions.AllowDelete)
-                    return string.Create(InvariantCulture, $"Entity '{change.Entity.GetType().FullName}' does not {nameof(ISaveChangesPermissions.AllowDelete)}.");
+                    return string.Create(
+                        InvariantCulture,
+                        $"Entity '{change.Entity.GetType().FullName}' does not {nameof(ISaveChangesPermissions.AllowDelete)}.");
 
                 return null;
             })

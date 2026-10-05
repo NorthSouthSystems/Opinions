@@ -10,7 +10,8 @@ namespace NorthSouthSystems.Infra;
 
 [ScanRegisterSingleton]
 public sealed class AzureImmutableBlobStorage(
-    [FromKeyedServices(nameof(AzureImmutableBlobStorage))] BlobContainerClient client,
+    [FromKeyedServices(nameof(AzureImmutableBlobStorage))]
+    BlobContainerClient client,
     CompressionPickler pickler)
     : IImmutableBlobStorage
 {

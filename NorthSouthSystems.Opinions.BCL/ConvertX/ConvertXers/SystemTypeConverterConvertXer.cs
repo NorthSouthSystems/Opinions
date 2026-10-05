@@ -15,7 +15,8 @@ public class SystemTypeConverterConvertXer : IConvertXer
 
         if (valueTypeConverter.CanConvertTo(request.ConversionTypeFlattened))
         {
-            request.Converted(valueTypeConverter.ConvertTo(null, request.Culture, request.Value, request.ConversionTypeFlattened));
+            request.Converted(
+                valueTypeConverter.ConvertTo(null, request.Culture, request.Value, request.ConversionTypeFlattened));
             return;
         }
 

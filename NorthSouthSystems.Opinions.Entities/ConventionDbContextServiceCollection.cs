@@ -8,8 +8,10 @@ public static class ConventionDbContextServiceCollectionExtensions
 {
     public static IServiceCollection AddConventionDbContext
         <TDbContext, TAtomicCommandRepository, TReadOnlyRepository, TUnitOfWorkRepository>(
-            this IServiceCollection services, string name)
-        where TDbContext : ConventionDbContext<TDbContext>, TAtomicCommandRepository, TReadOnlyRepository, TUnitOfWorkRepository
+            this IServiceCollection services,
+            string name)
+        where TDbContext
+            : ConventionDbContext<TDbContext>, TAtomicCommandRepository, TReadOnlyRepository, TUnitOfWorkRepository
         where TAtomicCommandRepository : class, IAtomicCommandRepository
         where TReadOnlyRepository : class, IReadOnlyRepository
         where TUnitOfWorkRepository : class, IUnitOfWorkRepository

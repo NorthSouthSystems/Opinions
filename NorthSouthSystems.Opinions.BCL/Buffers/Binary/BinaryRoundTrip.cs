@@ -107,18 +107,53 @@ public static class BinaryRoundTrip
         return s!;
     }
 
-    public static void WriteBase64Bool(bool value, Action<string> writer) => WriteBool(value, bytes => writer(Convert.ToBase64String(bytes)));
-    public static void WriteBase64Byte(byte value, Action<string> writer) => WriteByte(value, bytes => writer(Convert.ToBase64String(bytes)));
-    public static void WriteBase64SByte(sbyte value, Action<string> writer) => WriteSByte(value, bytes => writer(Convert.ToBase64String(bytes)));
-    public static void WriteBase64Short(short value, Action<string> writer) => WriteShort(value, bytes => writer(Convert.ToBase64String(bytes)));
-    public static void WriteBase64UShort(ushort value, Action<string> writer) => WriteUShort(value, bytes => writer(Convert.ToBase64String(bytes)));
-    public static void WriteBase64Int(int value, Action<string> writer) => WriteInt(value, bytes => writer(Convert.ToBase64String(bytes)));
-    public static void WriteBase64UInt(uint value, Action<string> writer) => WriteUInt(value, bytes => writer(Convert.ToBase64String(bytes)));
-    public static void WriteBase64Long(long value, Action<string> writer) => WriteLong(value, bytes => writer(Convert.ToBase64String(bytes)));
-    public static void WriteBase64ULong(ulong value, Action<string> writer) => WriteULong(value, bytes => writer(Convert.ToBase64String(bytes)));
-    public static void WriteBase64Double(double value, Action<string> writer) => WriteDouble(value, bytes => writer(Convert.ToBase64String(bytes)));
-    public static void WriteBase64Decimal(decimal value, Action<string> writer) => WriteDecimal(value, bytes => writer(Convert.ToBase64String(bytes)));
-    public static void WriteBase64String(string value, Action<string> writer) => WriteString(value, bytes => writer(Convert.ToBase64String(bytes)));
+    public static void WriteBase64Bool(bool value, Action<string> writer) => WriteBool(
+        value,
+        bytes => writer(Convert.ToBase64String(bytes)));
+
+    public static void WriteBase64Byte(byte value, Action<string> writer) => WriteByte(
+        value,
+        bytes => writer(Convert.ToBase64String(bytes)));
+
+    public static void WriteBase64SByte(sbyte value, Action<string> writer) => WriteSByte(
+        value,
+        bytes => writer(Convert.ToBase64String(bytes)));
+
+    public static void WriteBase64Short(short value, Action<string> writer) => WriteShort(
+        value,
+        bytes => writer(Convert.ToBase64String(bytes)));
+
+    public static void WriteBase64UShort(ushort value, Action<string> writer) => WriteUShort(
+        value,
+        bytes => writer(Convert.ToBase64String(bytes)));
+
+    public static void WriteBase64Int(int value, Action<string> writer) => WriteInt(
+        value,
+        bytes => writer(Convert.ToBase64String(bytes)));
+
+    public static void WriteBase64UInt(uint value, Action<string> writer) => WriteUInt(
+        value,
+        bytes => writer(Convert.ToBase64String(bytes)));
+
+    public static void WriteBase64Long(long value, Action<string> writer) => WriteLong(
+        value,
+        bytes => writer(Convert.ToBase64String(bytes)));
+
+    public static void WriteBase64ULong(ulong value, Action<string> writer) => WriteULong(
+        value,
+        bytes => writer(Convert.ToBase64String(bytes)));
+
+    public static void WriteBase64Double(double value, Action<string> writer) => WriteDouble(
+        value,
+        bytes => writer(Convert.ToBase64String(bytes)));
+
+    public static void WriteBase64Decimal(decimal value, Action<string> writer) => WriteDecimal(
+        value,
+        bytes => writer(Convert.ToBase64String(bytes)));
+
+    public static void WriteBase64String(string value, Action<string> writer) => WriteString(
+        value,
+        bytes => writer(Convert.ToBase64String(bytes)));
 
     // bool
 

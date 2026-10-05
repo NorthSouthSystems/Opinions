@@ -9,7 +9,9 @@ namespace NorthSouthSystems;
 public static class Throw
 #pragma warning restore
 {
-    public static T IfNull<T>([NotNull] T? argument, [CallerArgumentExpression(nameof(argument))] string? paramName = null)
+    public static T IfNull<T>(
+        [NotNull] T? argument,
+        [CallerArgumentExpression(nameof(argument))] string? paramName = null)
         where T : class
     {
         ArgumentNullException.ThrowIfNull(argument, paramName);
@@ -25,7 +27,9 @@ public static class Throw
         return argument;
     }
 
-    public static T IfDefault<T>([NotNull] T? argument, [CallerArgumentExpression(nameof(argument))] string? paramName = null)
+    public static T IfDefault<T>(
+        [NotNull] T? argument,
+        [CallerArgumentExpression(nameof(argument))] string? paramName = null)
         where T : struct
     {
         ArgumentExceptionX.ThrowIfDefault(argument, paramName);
@@ -35,14 +39,18 @@ public static class Throw
 
     #region String (ArgumentException pass-through)
 
-    public static string IfNullOrEmpty([NotNull] string? argument, [CallerArgumentExpression(nameof(argument))] string? paramName = null)
+    public static string IfNullOrEmpty(
+        [NotNull] string? argument,
+        [CallerArgumentExpression(nameof(argument))] string? paramName = null)
     {
         ArgumentException.ThrowIfNullOrEmpty(argument, paramName);
 
         return argument;
     }
 
-    public static string IfNullOrWhiteSpace([NotNull] string? argument, [CallerArgumentExpression(nameof(argument))] string? paramName = null)
+    public static string IfNullOrWhiteSpace(
+        [NotNull] string? argument,
+        [CallerArgumentExpression(nameof(argument))] string? paramName = null)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(argument, paramName);
 
@@ -99,7 +107,10 @@ public static class Throw
 
     #region IComparable<T> (ArgumentOutOfRangeException pass-through)
 
-    public static T IfGreaterThan<T>(T value, T other, [CallerArgumentExpression(nameof(value))] string? paramName = null)
+    public static T IfGreaterThan<T>(
+        T value,
+        T other,
+        [CallerArgumentExpression(nameof(value))] string? paramName = null)
         where T : IComparable<T>
     {
         ArgumentOutOfRangeException.ThrowIfGreaterThan(value, other, paramName);
@@ -107,7 +118,10 @@ public static class Throw
         return value;
     }
 
-    public static T IfGreaterThanOrEqual<T>(T value, T other, [CallerArgumentExpression(nameof(value))] string? paramName = null)
+    public static T IfGreaterThanOrEqual<T>(
+        T value,
+        T other,
+        [CallerArgumentExpression(nameof(value))] string? paramName = null)
         where T : IComparable<T>
     {
         ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(value, other, paramName);
@@ -123,7 +137,10 @@ public static class Throw
         return value;
     }
 
-    public static T IfLessThanOrEqual<T>(T value, T other, [CallerArgumentExpression(nameof(value))] string? paramName = null)
+    public static T IfLessThanOrEqual<T>(
+        T value,
+        T other,
+        [CallerArgumentExpression(nameof(value))] string? paramName = null)
         where T : IComparable<T>
     {
         ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(value, other, paramName);
@@ -135,7 +152,10 @@ public static class Throw
 
     #region Comparer<TEnum> (custom)
 
-    public static TEnum IfGreaterThanEnum<TEnum>(TEnum value, TEnum other, [CallerArgumentExpression(nameof(value))] string? paramName = null)
+    public static TEnum IfGreaterThanEnum<TEnum>(
+        TEnum value,
+        TEnum other,
+        [CallerArgumentExpression(nameof(value))] string? paramName = null)
         where TEnum : struct, Enum
     {
         if (Comparer<TEnum>.Default.Compare(value, other) > 0)
@@ -144,7 +164,10 @@ public static class Throw
         return value;
     }
 
-    public static TEnum IfGreaterThanOrEqualEnum<TEnum>(TEnum value, TEnum other, [CallerArgumentExpression(nameof(value))] string? paramName = null)
+    public static TEnum IfGreaterThanOrEqualEnum<TEnum>(
+        TEnum value,
+        TEnum other,
+        [CallerArgumentExpression(nameof(value))] string? paramName = null)
         where TEnum : struct, Enum
     {
         if (Comparer<TEnum>.Default.Compare(value, other) >= 0)
@@ -153,7 +176,10 @@ public static class Throw
         return value;
     }
 
-    public static TEnum IfLessThanEnum<TEnum>(TEnum value, TEnum other, [CallerArgumentExpression(nameof(value))] string? paramName = null)
+    public static TEnum IfLessThanEnum<TEnum>(
+        TEnum value,
+        TEnum other,
+        [CallerArgumentExpression(nameof(value))] string? paramName = null)
         where TEnum : struct, Enum
     {
         if (Comparer<TEnum>.Default.Compare(value, other) < 0)
@@ -162,7 +188,10 @@ public static class Throw
         return value;
     }
 
-    public static TEnum IfLessThanOrEqualEnum<TEnum>(TEnum value, TEnum other, [CallerArgumentExpression(nameof(value))] string? paramName = null)
+    public static TEnum IfLessThanOrEqualEnum<TEnum>(
+        TEnum value,
+        TEnum other,
+        [CallerArgumentExpression(nameof(value))] string? paramName = null)
         where TEnum : struct, Enum
     {
         if (Comparer<TEnum>.Default.Compare(value, other) <= 0)
@@ -173,24 +202,45 @@ public static class Throw
 
     // Extracted in order to make the successful path smaller and more likely to inline.
     [DoesNotReturn]
-    private static void ComparerTEnumThrow<TEnum>(TEnum value, TEnum other, string? paramName, string inverseOperatorFriendlyName)
+    private static void ComparerTEnumThrow<TEnum>(
+        TEnum value,
+        TEnum other,
+        string? paramName,
+        string inverseOperatorFriendlyName)
         where TEnum : struct, Enum =>
-        throw new ArgumentOutOfRangeException(paramName, value,
-            string.Create(InvariantCulture, $"{paramName} ('{value}') must be {inverseOperatorFriendlyName} '{other}'."));
+        throw new ArgumentOutOfRangeException(
+            paramName,
+            value,
+            string.Create(
+                InvariantCulture,
+                $"{paramName} ('{value}') must be {inverseOperatorFriendlyName} '{other}'."));
 
     #endregion
 
     #region IComparable<T> Between (custom)
 
-    public static T IfBetween<T>(T value, T leftInclusive, T rightInclusive, [CallerArgumentExpression(nameof(value))] string? paramName = null)
+    public static T IfBetween<T>(
+        T value,
+        T leftInclusive,
+        T rightInclusive,
+        [CallerArgumentExpression(nameof(value))] string? paramName = null)
         where T : IComparable<T> =>
         BetweenHelper(value, leftInclusive, rightInclusive, paramName, true);
 
-    public static T IfNotBetween<T>(T value, T leftInclusive, T rightInclusive, [CallerArgumentExpression(nameof(value))] string? paramName = null)
+    public static T IfNotBetween<T>(
+        T value,
+        T leftInclusive,
+        T rightInclusive,
+        [CallerArgumentExpression(nameof(value))] string? paramName = null)
         where T : IComparable<T> =>
         BetweenHelper(value, leftInclusive, rightInclusive, paramName, false);
 
-    private static T BetweenHelper<T>(T value, T leftInclusive, T rightInclusive, string? paramName, bool isBetweenThrows)
+    private static T BetweenHelper<T>(
+        T value,
+        T leftInclusive,
+        T rightInclusive,
+        string? paramName,
+        bool isBetweenThrows)
         where T : IComparable<T>
     {
         // The ArgumentOutOfRangeException.Throw* methods do NOT validate their parameters and allow
@@ -209,24 +259,46 @@ public static class Throw
 
     // Extracted in order to make the successful path smaller and more likely to inline.
     [DoesNotReturn]
-    private static void BetweenHelperThrow<T>(T value, T leftInclusive, T rightInclusive, string? paramName, bool isBetweenThrows)
+    private static void BetweenHelperThrow<T>(
+        T value,
+        T leftInclusive,
+        T rightInclusive,
+        string? paramName,
+        bool isBetweenThrows)
         where T : IComparable<T> =>
-        throw new ArgumentOutOfRangeException(paramName, value,
-            string.Create(InvariantCulture, $"{paramName} ('{value}') must {(isBetweenThrows ? "not " : string.Empty)}be between '{leftInclusive}' and '{rightInclusive}' inclusively."));
+        throw new ArgumentOutOfRangeException(
+            paramName,
+            value,
+            string.Create(
+                InvariantCulture,
+                $"{paramName} ('{value}') must {(isBetweenThrows ? "not " : string.Empty)}be between '{leftInclusive}' and '{rightInclusive}' inclusively."));
 
     #endregion
 
     #region Comparer<TEnum> Between (custom)
 
-    public static TEnum IfBetweenEnum<TEnum>(TEnum value, TEnum leftInclusive, TEnum rightInclusive, [CallerArgumentExpression(nameof(value))] string? paramName = null)
+    public static TEnum IfBetweenEnum<TEnum>(
+        TEnum value,
+        TEnum leftInclusive,
+        TEnum rightInclusive,
+        [CallerArgumentExpression(nameof(value))] string? paramName = null)
         where TEnum : struct, Enum =>
         BetweenEnumHelper(value, leftInclusive, rightInclusive, paramName, true);
 
-    public static TEnum IfNotBetweenEnum<TEnum>(TEnum value, TEnum leftInclusive, TEnum rightInclusive, [CallerArgumentExpression(nameof(value))] string? paramName = null)
+    public static TEnum IfNotBetweenEnum<TEnum>(
+        TEnum value,
+        TEnum leftInclusive,
+        TEnum rightInclusive,
+        [CallerArgumentExpression(nameof(value))] string? paramName = null)
         where TEnum : struct, Enum =>
         BetweenEnumHelper(value, leftInclusive, rightInclusive, paramName, false);
 
-    private static TEnum BetweenEnumHelper<TEnum>(TEnum value, TEnum leftInclusive, TEnum rightInclusive, string? paramName, bool isBetweenThrows)
+    private static TEnum BetweenEnumHelper<TEnum>(
+        TEnum value,
+        TEnum leftInclusive,
+        TEnum rightInclusive,
+        string? paramName,
+        bool isBetweenThrows)
         where TEnum : struct, Enum
     {
         var comparer = Comparer<TEnum>.Default;
@@ -244,10 +316,19 @@ public static class Throw
 
     // Extracted in order to make the successful path smaller and more likely to inline.
     [DoesNotReturn]
-    private static void BetweenEnumHelperThrow<TEnum>(TEnum value, TEnum leftInclusive, TEnum rightInclusive, string? paramName, bool isBetweenThrows)
+    private static void BetweenEnumHelperThrow<TEnum>(
+        TEnum value,
+        TEnum leftInclusive,
+        TEnum rightInclusive,
+        string? paramName,
+        bool isBetweenThrows)
         where TEnum : struct, Enum =>
-        throw new ArgumentOutOfRangeException(paramName, value,
-            string.Create(InvariantCulture, $"{paramName} ('{value}') must {(isBetweenThrows ? "not " : string.Empty)}be between '{leftInclusive}' and '{rightInclusive}' inclusively."));
+        throw new ArgumentOutOfRangeException(
+            paramName,
+            value,
+            string.Create(
+                InvariantCulture,
+                $"{paramName} ('{value}') must {(isBetweenThrows ? "not " : string.Empty)}be between '{leftInclusive}' and '{rightInclusive}' inclusively."));
 
     #endregion
 }

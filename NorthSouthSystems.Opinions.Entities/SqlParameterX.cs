@@ -6,31 +6,39 @@ namespace NorthSouthSystems.Entities;
 
 public static class SqlParameterX
 {
-    public static SqlParameter CreateIdOfT<T>(IEnumerable<T> ids,
-        [CallerArgumentExpression(nameof(ids))] string? name = null) =>
+    public static SqlParameter CreateIdOfT<T>(
+        IEnumerable<T> ids,
+        [CallerArgumentExpression(nameof(ids))]
+        string? name = null) =>
         IdOfT.NewSqlParameter(CallerArgumentToParameterName(name), ids);
 
-    public static SqlParameter CreateScalar(UInt128? value,
+    public static SqlParameter CreateScalar(
+        UInt128? value,
         ParameterDirection direction = ParameterDirection.Input,
-        [CallerArgumentExpression(nameof(value))] string? name = null) =>
+        [CallerArgumentExpression(nameof(value))]
+        string? name = null) =>
         direction == ParameterDirection.Input // Unfortunately, Throw.IfNotEqual does not allow enums at this time.
             ? CreateScalar(value?.ToBytesBigEndian(), direction, name)
             : throw new NotSupportedException(direction.ToString());
 
     // Using TValue value as the first parameter does not allow generic arguments to be inferred and causes callers that
     // do not explicitly pass generic arguments to use the CreateScaler(object value) overload instead.
-    public static SqlParameter CreateScalar<TValueObject, TValue>(IStructValueObject<TValueObject, TValue>? value,
+    public static SqlParameter CreateScalar<TValueObject, TValue>(
+        IStructValueObject<TValueObject, TValue>? value,
         ParameterDirection direction = ParameterDirection.Input,
-        [CallerArgumentExpression(nameof(value))] string? name = null)
+        [CallerArgumentExpression(nameof(value))]
+        string? name = null)
         where TValueObject : struct, IStructValueObject<TValueObject, TValue>
         where TValue : struct, IComparable<TValue> =>
         CreateScalar(value?.Value, direction, name);
 
     // Using TValue value as the first parameter does not allow generic arguments to be inferred and causes callers that
     // do not explicitly pass generic arguments to use the CreateScaler(object value) overload instead.
-    public static SqlParameter CreateScalar<TValueObject, TValue>(IValueObject<TValueObject, TValue> value,
+    public static SqlParameter CreateScalar<TValueObject, TValue>(
+        IValueObject<TValueObject, TValue> value,
         ParameterDirection direction = ParameterDirection.Input,
-        [CallerArgumentExpression(nameof(value))] string? name = null)
+        [CallerArgumentExpression(nameof(value))]
+        string? name = null)
         where TValueObject : struct, IValueObject<TValueObject, TValue>
         where TValue : IComparable<TValue>
     {
@@ -42,16 +50,20 @@ public static class SqlParameterX
         return CreateScalar(value.Value, direction, name);
     }
 
-    public static SqlParameter CreateScalar(object? value,
+    public static SqlParameter CreateScalar(
+        object? value,
         ParameterDirection direction = ParameterDirection.Input,
-        [CallerArgumentExpression(nameof(value))] string? name = null) =>
+        [CallerArgumentExpression(nameof(value))]
+        string? name = null) =>
         new(CallerArgumentToParameterName(name), value) { Direction = direction };
 
     private static string CallerArgumentToParameterName(string? name)
     {
         Throw.IfNullOrWhiteSpace(name);
 
-        string[] parts = name.Split([' ', '.', '(', ')'], StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        string[] parts = name.Split(
+            [' ', '.', '(', ')'],
+            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
         if (parts.Length > 1)
         {
@@ -61,6 +73,8 @@ public static class SqlParameterX
                 name = parts[^2] + name;
         }
 
-        return string.Create(InvariantCulture, $"@{char.ToUpper(name[0], InvariantCulture)}{(name.Length > 1 ? name[1..] : string.Empty)}");
+        return string.Create(
+            InvariantCulture,
+            $"@{char.ToUpper(name[0], InvariantCulture)}{(name.Length > 1 ? name[1..] : string.Empty)}");
     }
 }

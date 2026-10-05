@@ -6,8 +6,10 @@ namespace NorthSouthSystems.Scrutor;
 
 public static class ConventionOptionsExtensions
 {
-    public static OptionsBuilder<T> AddConventionOptions<T>(this IServiceCollection services,
-        string? name = null, Action<T>? configure = null)
+    public static OptionsBuilder<T> AddConventionOptions<T>(
+        this IServiceCollection services,
+        string? name = null,
+        Action<T>? configure = null)
         where T : class
     {
         string sectionName = (typeof(T).FullName ?? typeof(T).Name).Replace('.', ':');

@@ -16,13 +16,17 @@ public static partial class MathX
         return Math.Floor(value / factor) * factor;
     }
 
-    public static decimal RoundToFactor(this decimal value, decimal factor, MidpointRounding mode = MidpointRounding.AwayFromZero)
+    public static decimal RoundToFactor(
+        this decimal value,
+        decimal factor,
+        MidpointRounding mode = MidpointRounding.AwayFromZero)
     {
         ThrowIfFactorOutOfRange(factor);
 
         if (mode == MidpointRounding.ToEven)
         {
-            throw new ArgumentOutOfRangeException(nameof(mode),
+            throw new ArgumentOutOfRangeException(
+                nameof(mode),
                 $"{nameof(MidpointRounding)}.{MidpointRounding.ToEven} is ambiguous when calling {nameof(RoundToFactor)}.");
         }
 

@@ -9,7 +9,8 @@ namespace NorthSouthSystems.Entities;
 
 [ScanRegisterSingleton]
 public sealed partial class RepositoryTrackedCacheVersionProvider(
-    IOptions<RepositoryTrackedCacheVersionProviderOptions> options, IServiceScopeFactory serviceScopeFactory,
+    IOptions<RepositoryTrackedCacheVersionProviderOptions> options,
+    IServiceScopeFactory serviceScopeFactory,
     ILogger<RepositoryTrackedCacheVersionProvider> logger)
     : BackgroundService, ITrackedCacheVersionProvider
 {
@@ -30,7 +31,10 @@ public sealed partial class RepositoryTrackedCacheVersionProvider(
                 await Task.Delay(Throw.IfNull(options).Value.PollingDelay, stoppingToken).ConfigureAwait(false);
                 await PollAsync(false, stoppingToken).ConfigureAwait(false);
             }
-            catch (OperationCanceledException) when (stoppingToken.IsCancellationRequested) { break; }
+            catch (OperationCanceledException) when (stoppingToken.IsCancellationRequested)
+            {
+                break;
+            }
         }
     }
 

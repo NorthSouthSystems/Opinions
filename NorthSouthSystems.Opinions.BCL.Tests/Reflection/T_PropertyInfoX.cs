@@ -1,4 +1,5 @@
 ﻿// Adapted and simplified from a ChatGPT conversation on 2025-08-21.
+
 using NorthSouthSystems.Reflection;
 
 public sealed class T_PropertyInfoX
@@ -17,7 +18,10 @@ public sealed class T_PropertyInfoX
         public OtherClass Other => new();
 
         // For Exceptions.
-        public string SetterOnlyStringProperty { set { } }
+        public string SetterOnlyStringProperty
+        {
+            set { }
+        }
     }
 
     public sealed class OtherClass
@@ -93,30 +97,47 @@ public sealed class T_PropertyInfoX
         {
             object result;
 
-            result = PropertyInfoX.GetValueCompiled(new TheClass(), $"{nameof(TheClass.Other)}.{nameof(OtherClass.StringProperty)}");
+            result = PropertyInfoX.GetValueCompiled(
+                new TheClass(),
+                $"{nameof(TheClass.Other)}.{nameof(OtherClass.StringProperty)}");
             result.Should().BeOfType<string>().Which.Should().Be(new OtherClass().StringProperty);
 
-            result = PropertyInfoX.GetValueCompiled(new TheClass(), $"{nameof(TheClass.Other)}.{nameof(OtherClass.IntProperty)}");
+            result = PropertyInfoX.GetValueCompiled(
+                new TheClass(),
+                $"{nameof(TheClass.Other)}.{nameof(OtherClass.IntProperty)}");
             result.Should().BeOfType<int>().Which.Should().Be(new OtherClass().IntProperty);
 
-            result = PropertyInfoX.GetValueCompiled(new TheClass(), $"{nameof(TheClass.Other)}.{nameof(OtherClass.NullableDoubleProperty)}");
+            result = PropertyInfoX.GetValueCompiled(
+                new TheClass(),
+                $"{nameof(TheClass.Other)}.{nameof(OtherClass.NullableDoubleProperty)}");
             result.Should().BeOfType<double>().Which.Should().Be(new OtherClass().NullableDoubleProperty);
 
-            result = PropertyInfoX.GetValueCompiled(new TheClass(), $"{nameof(TheClass.Other)}.{nameof(OtherClass.NullStringProperty)}");
+            result = PropertyInfoX.GetValueCompiled(
+                new TheClass(),
+                $"{nameof(TheClass.Other)}.{nameof(OtherClass.NullStringProperty)}");
             result.Should().BeNull();
 
-            result = PropertyInfoX.GetValueCompiled(new TheClass(), $"{nameof(TheClass.Other)}.{nameof(OtherClass.NullDoubleProperty)}");
+            result = PropertyInfoX.GetValueCompiled(
+                new TheClass(),
+                $"{nameof(TheClass.Other)}.{nameof(OtherClass.NullDoubleProperty)}");
             result.Should().BeNull();
 
-            result = PropertyInfoX.GetValueCompiled(new TheClass(), $"{nameof(TheClass.Other)}.{nameof(OtherClass.NonPublicStringProperty)}", true);
+            result = PropertyInfoX.GetValueCompiled(
+                new TheClass(),
+                $"{nameof(TheClass.Other)}.{nameof(OtherClass.NonPublicStringProperty)}",
+                true);
             result.Should().BeOfType<string>().Which.Should().Be(new OtherClass().NonPublicStringProperty);
 
             // Derived
 
-            result = PropertyInfoX.GetValueCompiled(new TheDerived(), $"{nameof(TheDerived.Other)}.{nameof(OtherClass.StringProperty)}");
+            result = PropertyInfoX.GetValueCompiled(
+                new TheDerived(),
+                $"{nameof(TheDerived.Other)}.{nameof(OtherClass.StringProperty)}");
             result.Should().BeOfType<string>().Which.Should().Be(new OtherClass().StringProperty);
 
-            result = PropertyInfoX.GetValueCompiled(new TheDerived(), $"{nameof(TheDerived.Another)}.{nameof(AnotherClass.StringProperty)}");
+            result = PropertyInfoX.GetValueCompiled(
+                new TheDerived(),
+                $"{nameof(TheDerived.Another)}.{nameof(AnotherClass.StringProperty)}");
             result.Should().BeOfType<string>().Which.Should().Be(new AnotherClass().StringProperty);
         }
 
@@ -125,12 +146,16 @@ public sealed class T_PropertyInfoX
         {
             object result;
 
-            result = PropertyInfoX.GetValueCompiled(new TheClass(), $"{nameof(TheClass.Other)}.{nameof(OtherClass.Another)}.{nameof(AnotherClass.StringProperty)}");
+            result = PropertyInfoX.GetValueCompiled(
+                new TheClass(),
+                $"{nameof(TheClass.Other)}.{nameof(OtherClass.Another)}.{nameof(AnotherClass.StringProperty)}");
             result.Should().BeOfType<string>().Which.Should().Be(new AnotherClass().StringProperty);
 
             // Derived
 
-            result = PropertyInfoX.GetValueCompiled(new TheDerived(), $"{nameof(TheDerived.Other)}.{nameof(OtherClass.Another)}.{nameof(AnotherClass.StringProperty)}");
+            result = PropertyInfoX.GetValueCompiled(
+                new TheDerived(),
+                $"{nameof(TheDerived.Other)}.{nameof(OtherClass.Another)}.{nameof(AnotherClass.StringProperty)}");
             result.Should().BeOfType<string>().Which.Should().Be(new AnotherClass().StringProperty);
         }
 
@@ -166,7 +191,9 @@ public sealed class T_PropertyInfoX
             result = PropertyInfoX.GetGetterReturnTypeOrThrow(typeof(TheClass), nameof(TheClass.IntProperty));
             result.Should().Be(typeof(int));
 
-            result = PropertyInfoX.GetGetterReturnTypeOrThrow(typeof(TheClass), nameof(TheClass.NullableDoubleProperty));
+            result = PropertyInfoX.GetGetterReturnTypeOrThrow(
+                typeof(TheClass),
+                nameof(TheClass.NullableDoubleProperty));
             result.Should().Be(typeof(double?));
 
             result = PropertyInfoX.GetGetterReturnTypeOrThrow(typeof(TheClass), nameof(TheClass.NullStringProperty));
@@ -175,7 +202,10 @@ public sealed class T_PropertyInfoX
             result = PropertyInfoX.GetGetterReturnTypeOrThrow(typeof(TheClass), nameof(TheClass.NullDoubleProperty));
             result.Should().Be(typeof(double?));
 
-            result = PropertyInfoX.GetGetterReturnTypeOrThrow(typeof(TheClass), nameof(TheClass.NonPublicStringProperty), true);
+            result = PropertyInfoX.GetGetterReturnTypeOrThrow(
+                typeof(TheClass),
+                nameof(TheClass.NonPublicStringProperty),
+                true);
             result.Should().Be(typeof(string));
 
             // Derived
@@ -189,30 +219,47 @@ public sealed class T_PropertyInfoX
         {
             object result;
 
-            result = PropertyInfoX.GetGetterReturnTypeOrThrow(typeof(TheClass), $"{nameof(TheClass.Other)}.{nameof(OtherClass.StringProperty)}");
+            result = PropertyInfoX.GetGetterReturnTypeOrThrow(
+                typeof(TheClass),
+                $"{nameof(TheClass.Other)}.{nameof(OtherClass.StringProperty)}");
             result.Should().Be(typeof(string));
 
-            result = PropertyInfoX.GetGetterReturnTypeOrThrow(typeof(TheClass), $"{nameof(TheClass.Other)}.{nameof(OtherClass.IntProperty)}");
+            result = PropertyInfoX.GetGetterReturnTypeOrThrow(
+                typeof(TheClass),
+                $"{nameof(TheClass.Other)}.{nameof(OtherClass.IntProperty)}");
             result.Should().Be(typeof(int));
 
-            result = PropertyInfoX.GetGetterReturnTypeOrThrow(typeof(TheClass), $"{nameof(TheClass.Other)}.{nameof(OtherClass.NullableDoubleProperty)}");
+            result = PropertyInfoX.GetGetterReturnTypeOrThrow(
+                typeof(TheClass),
+                $"{nameof(TheClass.Other)}.{nameof(OtherClass.NullableDoubleProperty)}");
             result.Should().Be(typeof(double?));
 
-            result = PropertyInfoX.GetGetterReturnTypeOrThrow(typeof(TheClass), $"{nameof(TheClass.Other)}.{nameof(OtherClass.NullStringProperty)}");
+            result = PropertyInfoX.GetGetterReturnTypeOrThrow(
+                typeof(TheClass),
+                $"{nameof(TheClass.Other)}.{nameof(OtherClass.NullStringProperty)}");
             result.Should().Be(typeof(string));
 
-            result = PropertyInfoX.GetGetterReturnTypeOrThrow(typeof(TheClass), $"{nameof(TheClass.Other)}.{nameof(OtherClass.NullDoubleProperty)}");
+            result = PropertyInfoX.GetGetterReturnTypeOrThrow(
+                typeof(TheClass),
+                $"{nameof(TheClass.Other)}.{nameof(OtherClass.NullDoubleProperty)}");
             result.Should().Be(typeof(double?));
 
-            result = PropertyInfoX.GetGetterReturnTypeOrThrow(typeof(TheClass), $"{nameof(TheClass.Other)}.{nameof(OtherClass.NonPublicStringProperty)}", true);
+            result = PropertyInfoX.GetGetterReturnTypeOrThrow(
+                typeof(TheClass),
+                $"{nameof(TheClass.Other)}.{nameof(OtherClass.NonPublicStringProperty)}",
+                true);
             result.Should().Be(typeof(string));
 
             // Derived
 
-            result = PropertyInfoX.GetGetterReturnTypeOrThrow(typeof(TheDerived), $"{nameof(TheDerived.Other)}.{nameof(OtherClass.StringProperty)}");
+            result = PropertyInfoX.GetGetterReturnTypeOrThrow(
+                typeof(TheDerived),
+                $"{nameof(TheDerived.Other)}.{nameof(OtherClass.StringProperty)}");
             result.Should().Be(typeof(string));
 
-            result = PropertyInfoX.GetGetterReturnTypeOrThrow(typeof(TheDerived), $"{nameof(TheDerived.Another)}.{nameof(AnotherClass.StringProperty)}");
+            result = PropertyInfoX.GetGetterReturnTypeOrThrow(
+                typeof(TheDerived),
+                $"{nameof(TheDerived.Another)}.{nameof(AnotherClass.StringProperty)}");
             result.Should().Be(typeof(string));
         }
 
@@ -221,12 +268,16 @@ public sealed class T_PropertyInfoX
         {
             object result;
 
-            result = PropertyInfoX.GetGetterReturnTypeOrThrow(typeof(TheClass), $"{nameof(TheClass.Other)}.{nameof(OtherClass.Another)}.{nameof(AnotherClass.StringProperty)}");
+            result = PropertyInfoX.GetGetterReturnTypeOrThrow(
+                typeof(TheClass),
+                $"{nameof(TheClass.Other)}.{nameof(OtherClass.Another)}.{nameof(AnotherClass.StringProperty)}");
             result.Should().Be(typeof(string));
 
             // Derived
 
-            result = PropertyInfoX.GetGetterReturnTypeOrThrow(typeof(TheDerived), $"{nameof(TheDerived.Other)}.{nameof(OtherClass.Another)}.{nameof(AnotherClass.StringProperty)}");
+            result = PropertyInfoX.GetGetterReturnTypeOrThrow(
+                typeof(TheDerived),
+                $"{nameof(TheDerived.Other)}.{nameof(OtherClass.Another)}.{nameof(AnotherClass.StringProperty)}");
             result.Should().Be(typeof(string));
         }
     }
@@ -244,7 +295,8 @@ public sealed class T_PropertyInfoX
             act = static () => PropertyInfoX.GetValueCompiled(new TheClass(), nameof(TheClass.NonPublicStringProperty));
             act.Should().ThrowExactly<ArgumentException>();
 
-            act = static () => PropertyInfoX.GetValueCompiled(new TheClass(), nameof(TheClass.SetterOnlyStringProperty));
+            act = static () =>
+                PropertyInfoX.GetValueCompiled(new TheClass(), nameof(TheClass.SetterOnlyStringProperty));
             act.Should().ThrowExactly<ArgumentException>();
         }
     }

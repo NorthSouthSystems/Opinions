@@ -5,10 +5,13 @@ using System.Reflection;
 
 namespace NorthSouthSystems.Entities;
 
-public abstract partial class ConventionDbContext<TDbContext> : ConventionDbContext, IAtomicCommandRepository, IUnitOfWorkRepository
+public abstract partial class ConventionDbContext<TDbContext>
+    : ConventionDbContext, IAtomicCommandRepository, IUnitOfWorkRepository
     where TDbContext : ConventionDbContext<TDbContext>
 {
-    protected ConventionDbContext(DbContextOptions<TDbContext> options, ITrackCreatedUpdatedByProvider trackCreatedUpdatedByProvider)
+    protected ConventionDbContext(
+        DbContextOptions<TDbContext> options,
+        ITrackCreatedUpdatedByProvider trackCreatedUpdatedByProvider)
         : base(options)
     {
         TrackCreatedUpdatedByProvider = Throw.IfNull(trackCreatedUpdatedByProvider);
@@ -44,9 +47,7 @@ public abstract partial class ConventionDbContext<TDbContext> : ConventionDbCont
         foreach (var foreignKey in modelBuilder.Model
                      .GetEntityTypes()
                      .SelectMany(e => e.GetForeignKeys()))
-        {
             foreignKey.DeleteBehavior = DeleteBehavior.NoAction;
-        }
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -98,8 +99,9 @@ public abstract partial class ConventionDbContext<TDbContext> : ConventionDbCont
         }
     }
 
-    private static readonly MethodInfo ConfigureValueObjectPropertiesOfTypeMethod = typeof(ConventionDbContext<TDbContext>)
-        .GetMethod(nameof(ConfigureValueObjectPropertiesOfType), BindingFlags.NonPublic | BindingFlags.Static)!;
+    private static readonly MethodInfo ConfigureValueObjectPropertiesOfTypeMethod =
+        typeof(ConventionDbContext<TDbContext>)
+            .GetMethod(nameof(ConfigureValueObjectPropertiesOfType), BindingFlags.NonPublic | BindingFlags.Static)!;
 
     private static void ConfigureValueObjectPropertiesOfType<TValueObject, TValue>(ModelConfigurationBuilder builder)
         where TValueObject : struct, IValueObject<TValueObject, TValue>

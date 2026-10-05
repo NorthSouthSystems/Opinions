@@ -10,11 +10,13 @@ namespace NorthSouthSystems.Entities;
 /// <remarks>GetOrCreateAsync uses a single-flight pattern like Nss.Bcl/Threading/Tasks/SingleFlight; however, due to
 /// the cache tracking and the extra SetWhenNotNull methods in this class, we cannot delegate to it and instead have
 /// copied most of its code here.</remarks>
-public abstract class TrackedCache<TValue>(ITrackedCacheVersionProvider versionProvider, ILoggerFactory loggerFactory,
+public abstract class TrackedCache<TValue>(
+    ITrackedCacheVersionProvider versionProvider,
+    ILoggerFactory loggerFactory,
     MemoryCacheOptions? cacheOptions = null)
     : TrackedCache<object, TValue>(versionProvider, loggerFactory, cacheOptions)
 {
-    protected override sealed object KeySelector(TValue value) => Key;
+    protected sealed override object KeySelector(TValue value) => Key;
     private object Key => this;
 
     private new bool TryGet(object key, out TValue value) =>
@@ -29,7 +31,9 @@ public abstract class TrackedCache<TValue>(ITrackedCacheVersionProvider versionP
         base.GetOrCreateAsync(Key, (_, ct) => factory(ct));
 }
 
-public abstract class TrackedCache<TKey, TValue>(ITrackedCacheVersionProvider versionProvider, ILoggerFactory loggerFactory,
+public abstract class TrackedCache<TKey, TValue>(
+    ITrackedCacheVersionProvider versionProvider,
+    ILoggerFactory loggerFactory,
     MemoryCacheOptions? cacheOptions = null)
     : IDisposable
     where TKey : notnull
@@ -61,7 +65,7 @@ public abstract class TrackedCache<TKey, TValue>(ITrackedCacheVersionProvider ve
         value = default!;
 
         int entryVersion;
-        lock (_lock) { entryVersion = _version; }
+        lock (_lock) entryVersion = _version;
 
         if (!_cache.TryGetValue(key, out object? untyped))
             return false;
@@ -134,12 +138,14 @@ public abstract class TrackedCache<TKey, TValue>(ITrackedCacheVersionProvider ve
     // work done for a previous version of this TrackedCache.
     //
     // NOTE : Any changes to this method should be reviewed for the VERY similar [Create|SetWhenNotNull]Async methods.
-    private async Task<TValue> CreateAsync(TKey key, Func<TKey, CancellationToken, Task<TValue>> factory,
+    private async Task<TValue> CreateAsync(
+        TKey key,
+        Func<TKey, CancellationToken, Task<TValue>> factory,
         CancellationToken cancellationToken)
     {
         // We only cache if we are on the "entry version". If a potential race-condition occurred, we remove our key.
         int entryVersion;
-        lock (_lock) { entryVersion = _version; }
+        lock (_lock) entryVersion = _version;
 
         var value = await factory(key, cancellationToken).ConfigureAwait(false);
 
@@ -150,7 +156,9 @@ public abstract class TrackedCache<TKey, TValue>(ITrackedCacheVersionProvider ve
         }
 
         if (value is not null && !key.Equals(KeySelector(value)))
-            throw new ArgumentOutOfRangeException(nameof(key), string.Create(InvariantCulture, $"Must match the {nameof(KeySelector)} result."));
+            throw new ArgumentOutOfRangeException(
+                nameof(key),
+                string.Create(InvariantCulture, $"Must match the {nameof(KeySelector)} result."));
 
         _cache.Set(key, value, GetEntryOptions(key, value));
 
@@ -158,7 +166,7 @@ public abstract class TrackedCache<TKey, TValue>(ITrackedCacheVersionProvider ve
         // however, this is the most correct option and worth any performance costs in those rare (possibly never) cases.
         bool remove;
 
-        lock (_lock) { remove = _version != entryVersion; }
+        lock (_lock) remove = _version != entryVersion;
 
         if (remove)
             _cache.Remove(key);
@@ -175,7 +183,7 @@ public abstract class TrackedCache<TKey, TValue>(ITrackedCacheVersionProvider ve
 
         // We only cache if we are on the "entry version". If a potential race-condition occurred, we remove our key.
         int entryVersion;
-        lock (_lock) { entryVersion = _version; }
+        lock (_lock) entryVersion = _version;
 
         var value = await factory().ConfigureAwait(false);
 
@@ -196,7 +204,7 @@ public abstract class TrackedCache<TKey, TValue>(ITrackedCacheVersionProvider ve
         // most correct and worth any performance costs in those rare (possibly never) cases.
         bool remove;
 
-        lock (_lock) { remove = _version != entryVersion; }
+        lock (_lock) remove = _version != entryVersion;
 
         if (remove)
             _cache.Remove(key);
@@ -213,7 +221,7 @@ public abstract class TrackedCache<TKey, TValue>(ITrackedCacheVersionProvider ve
 
         // We only cache if we are on the "entry version". If a potential race-condition occurred, we remove our key.
         int entryVersion;
-        lock (_lock) { entryVersion = _version; }
+        lock (_lock) entryVersion = _version;
 
         var values = await factory().ConfigureAwait(false);
 
@@ -235,11 +243,13 @@ public abstract class TrackedCache<TKey, TValue>(ITrackedCacheVersionProvider ve
         // most correct and worth any performance costs in those rare (possibly never) cases.
         bool remove;
 
-        lock (_lock) { remove = _version != entryVersion; }
+        lock (_lock) remove = _version != entryVersion;
 
         if (remove)
+        {
             foreach (var kvp in keyValues)
                 _cache.Remove(kvp.Key);
+        }
 
         return values;
     }

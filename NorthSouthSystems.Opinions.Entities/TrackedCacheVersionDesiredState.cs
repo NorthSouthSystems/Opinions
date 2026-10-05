@@ -4,7 +4,8 @@ namespace NorthSouthSystems.Entities;
 
 public static class TrackedCacheVersionDesiredState
 {
-    public static void Apply(IUnitOfWorkEntitySet<TrackedCacheVersion> trackedCacheVersions,
+    public static void Apply(
+        IUnitOfWorkEntitySet<TrackedCacheVersion> trackedCacheVersions,
         params IEnumerable<Assembly> assemblies)
     {
         var trackedCacheVersionsByTypeName = Throw.IfNull(trackedCacheVersions)
@@ -18,14 +19,10 @@ public static class TrackedCacheVersionDesiredState
 
         foreach (string addTrackedCacheTypeName in trackedCacheTypeNames
                      .Where(tctn => !trackedCacheVersionsByTypeName.ContainsKey(tctn)))
-        {
             trackedCacheVersions.Add(new(addTrackedCacheTypeName));
-        }
 
         foreach (var removeTrackedCacheVersion in trackedCacheVersionsByTypeName.Values
                      .Where(tcv => !trackedCacheTypeNames.Contains(tcv.TypeName)))
-        {
             trackedCacheVersions.Remove(removeTrackedCacheVersion);
-        }
     }
 }

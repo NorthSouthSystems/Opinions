@@ -14,7 +14,9 @@ internal sealed class WhiteSpaceToNullInterceptor : SaveChangesInterceptor, IDry
         return result;
     }
 
-    public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result,
+    public override ValueTask<InterceptionResult<int>> SavingChangesAsync(
+        DbContextEventData eventData,
+        InterceptionResult<int> result,
         CancellationToken cancellationToken = default)
     {
         WhiteSpaceToNull(eventData.Context);

@@ -121,7 +121,11 @@
     [InlineData(-0.125, 0.25, -0.25)]
     [InlineData(-0.375, 0.25, -0.5)]
     [InlineData(-0.375, 0.5, -0.5)]
-    public void RoundToFactor(decimal value, decimal factor, decimal expectedValue, MidpointRounding mode = MidpointRounding.AwayFromZero)
+    public void RoundToFactor(
+        decimal value,
+        decimal factor,
+        decimal expectedValue,
+        MidpointRounding mode = MidpointRounding.AwayFromZero)
     {
         MathX.RoundToFactor(value, factor, mode).Should().Be(expectedValue);
         MathX.RoundToFactor((double)value, (double)factor, mode).Should().Be((double)expectedValue);

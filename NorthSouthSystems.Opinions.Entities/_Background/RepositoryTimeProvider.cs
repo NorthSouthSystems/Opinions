@@ -12,8 +12,10 @@ internal sealed class RepositoryTimeProviderWrapper(RepositoryTimeProvider inner
 }
 
 [ScanRegisterSingleton]
-public sealed partial class RepositoryTimeProvider(IOptions<RepositoryTimeProviderOptions> options,
-    IServiceScopeFactory serviceScopeFactory, ILogger<RepositoryTimeProvider> logger)
+public sealed partial class RepositoryTimeProvider(
+    IOptions<RepositoryTimeProviderOptions> options,
+    IServiceScopeFactory serviceScopeFactory,
+    ILogger<RepositoryTimeProvider> logger)
     : BackgroundService
 {
     private sealed class RepositoryTime
@@ -54,7 +56,10 @@ public sealed partial class RepositoryTimeProvider(IOptions<RepositoryTimeProvid
                 await Task.Delay(options.Value.PollingDelay, stoppingToken).ConfigureAwait(false);
                 await PollAsync(false, stoppingToken).ConfigureAwait(false);
             }
-            catch (OperationCanceledException) when (stoppingToken.IsCancellationRequested) { break; }
+            catch (OperationCanceledException) when (stoppingToken.IsCancellationRequested)
+            {
+                break;
+            }
         }
     }
 
@@ -112,8 +117,14 @@ public sealed partial class RepositoryTimeProvider(IOptions<RepositoryTimeProvid
         [LoggerMessage(LogLevel.Information, "Polling in progress")]
         internal static partial void InProgress(ILogger logger);
 
-        [LoggerMessage(LogLevel.Information, "Polling success: {delta:c}\n{systemUtcNow:o} system\n{repositoryUtcNow:o} repository")]
-        internal static partial void Success(ILogger logger, TimeSpan delta, DateTimeOffset systemUtcNow, DateTimeOffset repositoryUtcNow);
+        [LoggerMessage(
+            LogLevel.Information,
+            "Polling success: {delta:c}\n{systemUtcNow:o} system\n{repositoryUtcNow:o} repository")]
+        internal static partial void Success(
+            ILogger logger,
+            TimeSpan delta,
+            DateTimeOffset systemUtcNow,
+            DateTimeOffset repositoryUtcNow);
 
         [LoggerMessage(LogLevel.Warning, "Polling failure")]
         internal static partial void Failure(ILogger logger, Exception exception);

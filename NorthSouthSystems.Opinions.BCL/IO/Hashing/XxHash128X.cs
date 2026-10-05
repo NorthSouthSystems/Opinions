@@ -22,8 +22,12 @@ public static class XxHash128X
     public static void Append(this XxHash128 hasher, uint value) => BinaryRoundTrip.WriteUInt(value, hasher.Append);
     public static void Append(this XxHash128 hasher, long value) => BinaryRoundTrip.WriteLong(value, hasher.Append);
     public static void Append(this XxHash128 hasher, ulong value) => BinaryRoundTrip.WriteULong(value, hasher.Append);
-    public static void Append(this XxHash128 hasher, double value) => BinaryRoundTrip.WriteDouble(AppendNormalize(value), hasher.Append);
-    public static void Append(this XxHash128 hasher, decimal value) => BinaryRoundTrip.WriteDecimal(value, hasher.Append);
+
+    public static void Append(this XxHash128 hasher, double value) =>
+        BinaryRoundTrip.WriteDouble(AppendNormalize(value), hasher.Append);
+
+    public static void Append(this XxHash128 hasher, decimal value) =>
+        BinaryRoundTrip.WriteDecimal(value, hasher.Append);
 #pragma warning restore
 
     public static void Append(this XxHash128 hasher, string value)

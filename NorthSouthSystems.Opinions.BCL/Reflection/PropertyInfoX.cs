@@ -8,6 +8,7 @@ namespace NorthSouthSystems.Reflection;
 public static class PropertyInfoX
 {
     private static readonly ConcurrentDictionary<GetterCacheKey, Lazy<Func<object, object>>> _getterCache = new();
+
     private record struct GetterCacheKey(Type Type, string PropertyPath, bool IncludeNonPublic);
 
     public static object GetValueCompiled(object obj, string propertyPath, bool includeNonPublic = false)
@@ -67,7 +68,9 @@ public static class PropertyInfoX
         }
 
         var property = objType.GetProperty(propertyName, flattenFlags)
-            ?? throw new ArgumentException($"Property '{propertyName}' not found on {objType} with the requested accessibility.", nameof(propertyName));
+            ?? throw new ArgumentException(
+                $"Property '{propertyName}' not found on {objType} with the requested accessibility.",
+                nameof(propertyName));
 
         // We must get the PropertyInfo from the DeclaringType or else Expression.Property will throw:
         // "System.ArgumentException : The method '...' is not a property accessor (Parameter 'propertyAccessor')"
@@ -75,7 +78,9 @@ public static class PropertyInfoX
             property = property.DeclaringType.GetProperty(propertyName, declaredFlags)!;
 
         return property.GetGetMethod(includeNonPublic)
-            ?? throw new ArgumentException($"Property '{propertyName}' on {objType} does not have a getter with the requested accessibility.", nameof(propertyName));
+            ?? throw new ArgumentException(
+                $"Property '{propertyName}' on {objType} does not have a getter with the requested accessibility.",
+                nameof(propertyName));
     }
 
     private static Func<object, object> CompileGetter(GetterCacheKey key)

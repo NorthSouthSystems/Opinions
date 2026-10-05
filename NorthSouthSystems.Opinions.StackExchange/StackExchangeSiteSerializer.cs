@@ -27,7 +27,9 @@ public class StackExchangeSiteSerializer
     private string SiteDirectory => Path.Combine(_stackExchangeDirectory, _stackExchangeSite);
     private string MemoryPackDirectory<T>() => Path.Combine(SiteDirectory, typeof(T).Name);
 
-    public static void DeserializeSevenZippedXmlAndSerializeMemoryPackAll(string stackExchangeDirectory, string stackExchangeSite)
+    public static void DeserializeSevenZippedXmlAndSerializeMemoryPackAll(
+        string stackExchangeDirectory,
+        string stackExchangeSite)
     {
         var serializer = new StackExchangeSiteSerializer(stackExchangeDirectory, stackExchangeSite);
 

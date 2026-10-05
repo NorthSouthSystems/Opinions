@@ -19,8 +19,10 @@ internal class ScanRegisterCustomStrategy : RegistrationStrategy
             throw new UnreachableException(nameof(descriptor));
 
         if (implementationType.IsGenericTypeDefinition)
+        {
             throw new InvalidOperationException(
                 string.Create(InvariantCulture, $"Type '{implementationType}' is an open generic."));
+        }
 
         RegisterMethod.MakeGenericMethod(implementationType).Invoke(null, [services]);
     }
@@ -28,6 +30,7 @@ internal class ScanRegisterCustomStrategy : RegistrationStrategy
     private static readonly MethodInfo RegisterMethod = typeof(ScanRegisterCustomStrategy)
         .GetMethod(nameof(Register), BindingFlags.Static | BindingFlags.NonPublic)!;
 
-    private static void Register<T>(IServiceCollection services) where T : IScanRegisterCustom =>
+    private static void Register<T>(IServiceCollection services)
+        where T : IScanRegisterCustom =>
         T.Register(services);
 }

@@ -3,7 +3,8 @@ using System.Linq.Expressions;
 
 namespace NorthSouthSystems.Entities;
 
-public sealed record DbEntitySet<TEntity>(DbContext DbContext) : IUnitOfWorkEntitySet<TEntity>, IAsyncEnumerable<TEntity>
+public sealed record DbEntitySet<TEntity>(DbContext DbContext)
+    : IUnitOfWorkEntitySet<TEntity>, IAsyncEnumerable<TEntity>
     where TEntity : class
 {
     // DbSet

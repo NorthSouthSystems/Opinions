@@ -9,8 +9,5 @@ public sealed class RepositoryTimeProviderOptions
 [ScanRegisterSingleton]
 public sealed class RepositoryTimeProviderOptionsValidator : AbstractValidator<RepositoryTimeProviderOptions>
 {
-    public RepositoryTimeProviderOptionsValidator()
-    {
-        RuleFor(x => x.PollingDelay).NotEmpty();
-    }
+    public RepositoryTimeProviderOptionsValidator() { RuleFor(x => x.PollingDelay).NotEmpty(); }
 }

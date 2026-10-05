@@ -7,7 +7,8 @@ internal sealed class TrackCreatedUpdatedInterceptor(ITrackCreatedUpdatedByProvi
     : SaveChangesInterceptor
 {
     public override InterceptionResult<int> SavingChanges(
-        DbContextEventData eventData, InterceptionResult<int> result)
+        DbContextEventData eventData,
+        InterceptionResult<int> result)
     {
         Track(eventData.Context);
 
@@ -15,7 +16,9 @@ internal sealed class TrackCreatedUpdatedInterceptor(ITrackCreatedUpdatedByProvi
     }
 
     public override ValueTask<InterceptionResult<int>> SavingChangesAsync(
-        DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
+        DbContextEventData eventData,
+        InterceptionResult<int> result,
+        CancellationToken cancellationToken = default)
     {
         Track(eventData.Context);
 

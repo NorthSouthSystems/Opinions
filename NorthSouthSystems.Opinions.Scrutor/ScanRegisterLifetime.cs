@@ -4,7 +4,9 @@ using System.Reflection;
 namespace NorthSouthSystems.Scrutor;
 
 public sealed class ScanRegisterTransientAttribute() : ScanRegisterLifetimeAttribute(ServiceLifetime.Transient);
+
 public sealed class ScanRegisterScopedAttribute() : ScanRegisterLifetimeAttribute(ServiceLifetime.Scoped);
+
 public sealed class ScanRegisterSingletonAttribute() : ScanRegisterLifetimeAttribute(ServiceLifetime.Singleton);
 
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
@@ -32,7 +34,11 @@ internal class ScanRegisterLifetimeStrategy(ServiceLifetime lifetime) : Registra
         {
             services.Add(
                 descriptor.IsKeyedService
-                    ? new(descriptor.ServiceType, descriptor.ServiceKey, descriptor.KeyedImplementationFactory!, lifetime)
+                    ? new(
+                        descriptor.ServiceType,
+                        descriptor.ServiceKey,
+                        descriptor.KeyedImplementationFactory!,
+                        lifetime)
                     : new(descriptor.ServiceType, descriptor.ImplementationFactory!, lifetime));
             return;
         }
@@ -51,8 +57,10 @@ internal class ScanRegisterLifetimeStrategy(ServiceLifetime lifetime) : Registra
         // Due to limitations of the Microsoft DI container, a factory cannot be built to construct from an open generic
         // ServiceType because the DI container does not provide the generic type parameters to the factory signature.
         if (implementationType.IsGenericTypeDefinition)
+        {
             throw new NotSupportedException(
                 string.Create(InvariantCulture, $"Type '{implementationType}' is an open generic."));
+        }
 
         var internalConstructors = implementationType
             .GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic)
@@ -63,16 +71,24 @@ internal class ScanRegisterLifetimeStrategy(ServiceLifetime lifetime) : Registra
         {
             case 0:
                 throw new InvalidOperationException(
-                    string.Create(InvariantCulture, $"Type '{implementationType}' has no public or internal constructor."));
+                    string.Create(
+                        InvariantCulture,
+                        $"Type '{implementationType}' has no public or internal constructor."));
             case > 1:
                 throw new InvalidOperationException(
-                    string.Create(InvariantCulture, $"Type '{implementationType}' has multiple internal constructors."));
+                    string.Create(
+                        InvariantCulture,
+                        $"Type '{implementationType}' has multiple internal constructors."));
             default:
-                services.Add(new(descriptor.ServiceType, descriptor.ServiceKey,
-                    (serviceProvider, serviceKey) => Construct(internalConstructors[0], serviceProvider, serviceKey), lifetime));
+                services.Add(
+                    new(
+                        descriptor.ServiceType,
+                        descriptor.ServiceKey,
+                        (serviceProvider, serviceKey) =>
+                            Construct(internalConstructors[0], serviceProvider, serviceKey),
+                        lifetime));
                 break;
         }
-
     }
 
     private static object Construct(ConstructorInfo constructor, IServiceProvider serviceProvider, object? _)

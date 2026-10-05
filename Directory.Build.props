@@ -1,29 +1,29 @@
 <Project>
 
-    <Sdk Name="NorthSouthSystems.NET.Sdk" Version="14.0.1"/>
+    <Sdk Name="NorthSouthSystems.NET.Sdk" Version="14.0.1" />
 
     <PropertyGroup>
         <TargetFramework>net10.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="NorthSouthSystems.Text"/>
+        <PackageReference Include="NorthSouthSystems.Text" />
     </ItemGroup>
 
     <ItemGroup>
-        <Using Include="NorthSouthSystems"/>
-        <Using Include="NorthSouthSystems.Text"/>
-        <Using Include="System"/>
-        <Using Include="System.Collections"/>
-        <Using Include="System.Collections.Generic"/>
-        <Using Include="System.Collections.Immutable"/>
-        <Using Include="System.Globalization"/>
-        <Using Include="System.Linq"/>
-        <Using Include="System.Text"/>
-        <Using Include="System.Threading"/>
-        <Using Include="System.Threading.Tasks"/>
+        <Using Include="NorthSouthSystems" />
+        <Using Include="NorthSouthSystems.Text" />
+        <Using Include="System" />
+        <Using Include="System.Collections" />
+        <Using Include="System.Collections.Generic" />
+        <Using Include="System.Collections.Immutable" />
+        <Using Include="System.Globalization" />
+        <Using Include="System.Linq" />
+        <Using Include="System.Text" />
+        <Using Include="System.Threading" />
+        <Using Include="System.Threading.Tasks" />
         <!-- Statics -->
-        <Using Include="System.Globalization.CultureInfo" Static="true"/>
+        <Using Include="System.Globalization.CultureInfo" Static="true" />
     </ItemGroup>
 
 </Project>
