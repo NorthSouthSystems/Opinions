@@ -12,7 +12,8 @@ public static class ArgumentExceptionX
         string? messagePrefix = null,
         bool messageIncludeIndices = false,
         string? originalParamName = null,
-        [CallerArgumentExpression(nameof(enumerable))] string? paramName = null)
+        [CallerArgumentExpression(nameof(enumerable))]
+        string? paramName = null)
     {
         if (enumerable is null)
             return;
@@ -49,7 +50,8 @@ public static class ArgumentExceptionX
 
     public static void ThrowIfDefault<T>(
         [NotNull] T? argument,
-        [CallerArgumentExpression(nameof(argument))] string? paramName = null)
+        [CallerArgumentExpression(nameof(argument))]
+        string? paramName = null)
         where T : struct
     {
         if (argument is null)
@@ -60,7 +62,8 @@ public static class ArgumentExceptionX
 
     public static void ThrowIfDefault<T>(
         T argument,
-        [CallerArgumentExpression(nameof(argument))] string? paramName = null)
+        [CallerArgumentExpression(nameof(argument))]
+        string? paramName = null)
         where T : struct
     {
         if (argument.Equals(default(T)))

@@ -7,8 +7,10 @@ public abstract class AmbientContext<T>
     public static void SetRoot(T t)
     {
         if (_root is not null)
+        {
             throw new NotSupportedException(
                 string.Create(InvariantCulture, $"{nameof(SetRoot)} may only be called once."));
+        }
 
         _root = Throw.IfNull(t);
     }

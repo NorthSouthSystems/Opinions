@@ -11,7 +11,7 @@ public static class ConventionDbContextServiceCollectionExtensions
             this IServiceCollection services,
             string name)
         where TDbContext
-            : ConventionDbContext<TDbContext>, TAtomicCommandRepository, TReadOnlyRepository, TUnitOfWorkRepository
+        : ConventionDbContext<TDbContext>, TAtomicCommandRepository, TReadOnlyRepository, TUnitOfWorkRepository
         where TAtomicCommandRepository : class, IAtomicCommandRepository
         where TReadOnlyRepository : class, IReadOnlyRepository
         where TUnitOfWorkRepository : class, IUnitOfWorkRepository

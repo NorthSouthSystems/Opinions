@@ -82,10 +82,12 @@ public static class ValueObjectFactory<TValueObject, TValue>
             .GetConstructor(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance, [typeof(TValue)]);
 
         if (ctor is null)
+        {
             throw new InvalidOperationException(
                 string.Create(
                     InvariantCulture,
                     $"{typeof(TValueObject).Name}({nameof(TValue)}) constructor must exist."));
+        }
 
         var valueParam = Expression.Parameter(typeof(TValue), "value");
         var @new = Expression.New(ctor, valueParam);

@@ -45,19 +45,25 @@ internal sealed class SaveChangesPermissionsInterceptor : SaveChangesInterceptor
         var violations = changes.Select(change =>
             {
                 if (change.Entity is not ISaveChangesPermissions permissions)
+                {
                     return string.Create(
                         InvariantCulture,
                         $"Entity '{change.Entity.GetType().FullName}' must implement {nameof(ISaveChangesPermissions)}.");
+                }
 
                 if (change.State == EntityState.Modified && !permissions.AllowModify)
+                {
                     return string.Create(
                         InvariantCulture,
                         $"Entity '{change.Entity.GetType().FullName}' does not {nameof(ISaveChangesPermissions.AllowModify)}.");
+                }
 
                 if (change.State == EntityState.Deleted && !permissions.AllowDelete)
+                {
                     return string.Create(
                         InvariantCulture,
                         $"Entity '{change.Entity.GetType().FullName}' does not {nameof(ISaveChangesPermissions.AllowDelete)}.");
+                }
 
                 return null;
             })

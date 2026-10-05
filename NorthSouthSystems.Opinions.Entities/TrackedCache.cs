@@ -156,9 +156,11 @@ public abstract class TrackedCache<TKey, TValue>(
         }
 
         if (value is not null && !key.Equals(KeySelector(value)))
+        {
             throw new ArgumentOutOfRangeException(
                 nameof(key),
                 string.Create(InvariantCulture, $"Must match the {nameof(KeySelector)} result."));
+        }
 
         _cache.Set(key, value, GetEntryOptions(key, value));
 

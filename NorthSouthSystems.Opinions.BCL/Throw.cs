@@ -11,7 +11,8 @@ public static class Throw
 {
     public static T IfNull<T>(
         [NotNull] T? argument,
-        [CallerArgumentExpression(nameof(argument))] string? paramName = null)
+        [CallerArgumentExpression(nameof(argument))]
+        string? paramName = null)
         where T : class
     {
         ArgumentNullException.ThrowIfNull(argument, paramName);
@@ -29,7 +30,8 @@ public static class Throw
 
     public static T IfDefault<T>(
         [NotNull] T? argument,
-        [CallerArgumentExpression(nameof(argument))] string? paramName = null)
+        [CallerArgumentExpression(nameof(argument))]
+        string? paramName = null)
         where T : struct
     {
         ArgumentExceptionX.ThrowIfDefault(argument, paramName);
@@ -41,7 +43,8 @@ public static class Throw
 
     public static string IfNullOrEmpty(
         [NotNull] string? argument,
-        [CallerArgumentExpression(nameof(argument))] string? paramName = null)
+        [CallerArgumentExpression(nameof(argument))]
+        string? paramName = null)
     {
         ArgumentException.ThrowIfNullOrEmpty(argument, paramName);
 
@@ -50,7 +53,8 @@ public static class Throw
 
     public static string IfNullOrWhiteSpace(
         [NotNull] string? argument,
-        [CallerArgumentExpression(nameof(argument))] string? paramName = null)
+        [CallerArgumentExpression(nameof(argument))]
+        string? paramName = null)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(argument, paramName);
 
@@ -110,7 +114,8 @@ public static class Throw
     public static T IfGreaterThan<T>(
         T value,
         T other,
-        [CallerArgumentExpression(nameof(value))] string? paramName = null)
+        [CallerArgumentExpression(nameof(value))]
+        string? paramName = null)
         where T : IComparable<T>
     {
         ArgumentOutOfRangeException.ThrowIfGreaterThan(value, other, paramName);
@@ -121,7 +126,8 @@ public static class Throw
     public static T IfGreaterThanOrEqual<T>(
         T value,
         T other,
-        [CallerArgumentExpression(nameof(value))] string? paramName = null)
+        [CallerArgumentExpression(nameof(value))]
+        string? paramName = null)
         where T : IComparable<T>
     {
         ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(value, other, paramName);
@@ -140,7 +146,8 @@ public static class Throw
     public static T IfLessThanOrEqual<T>(
         T value,
         T other,
-        [CallerArgumentExpression(nameof(value))] string? paramName = null)
+        [CallerArgumentExpression(nameof(value))]
+        string? paramName = null)
         where T : IComparable<T>
     {
         ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(value, other, paramName);
@@ -155,7 +162,8 @@ public static class Throw
     public static TEnum IfGreaterThanEnum<TEnum>(
         TEnum value,
         TEnum other,
-        [CallerArgumentExpression(nameof(value))] string? paramName = null)
+        [CallerArgumentExpression(nameof(value))]
+        string? paramName = null)
         where TEnum : struct, Enum
     {
         if (Comparer<TEnum>.Default.Compare(value, other) > 0)
@@ -167,7 +175,8 @@ public static class Throw
     public static TEnum IfGreaterThanOrEqualEnum<TEnum>(
         TEnum value,
         TEnum other,
-        [CallerArgumentExpression(nameof(value))] string? paramName = null)
+        [CallerArgumentExpression(nameof(value))]
+        string? paramName = null)
         where TEnum : struct, Enum
     {
         if (Comparer<TEnum>.Default.Compare(value, other) >= 0)
@@ -179,7 +188,8 @@ public static class Throw
     public static TEnum IfLessThanEnum<TEnum>(
         TEnum value,
         TEnum other,
-        [CallerArgumentExpression(nameof(value))] string? paramName = null)
+        [CallerArgumentExpression(nameof(value))]
+        string? paramName = null)
         where TEnum : struct, Enum
     {
         if (Comparer<TEnum>.Default.Compare(value, other) < 0)
@@ -191,7 +201,8 @@ public static class Throw
     public static TEnum IfLessThanOrEqualEnum<TEnum>(
         TEnum value,
         TEnum other,
-        [CallerArgumentExpression(nameof(value))] string? paramName = null)
+        [CallerArgumentExpression(nameof(value))]
+        string? paramName = null)
         where TEnum : struct, Enum
     {
         if (Comparer<TEnum>.Default.Compare(value, other) <= 0)
@@ -223,7 +234,8 @@ public static class Throw
         T value,
         T leftInclusive,
         T rightInclusive,
-        [CallerArgumentExpression(nameof(value))] string? paramName = null)
+        [CallerArgumentExpression(nameof(value))]
+        string? paramName = null)
         where T : IComparable<T> =>
         BetweenHelper(value, leftInclusive, rightInclusive, paramName, true);
 
@@ -231,7 +243,8 @@ public static class Throw
         T value,
         T leftInclusive,
         T rightInclusive,
-        [CallerArgumentExpression(nameof(value))] string? paramName = null)
+        [CallerArgumentExpression(nameof(value))]
+        string? paramName = null)
         where T : IComparable<T> =>
         BetweenHelper(value, leftInclusive, rightInclusive, paramName, false);
 
@@ -281,7 +294,8 @@ public static class Throw
         TEnum value,
         TEnum leftInclusive,
         TEnum rightInclusive,
-        [CallerArgumentExpression(nameof(value))] string? paramName = null)
+        [CallerArgumentExpression(nameof(value))]
+        string? paramName = null)
         where TEnum : struct, Enum =>
         BetweenEnumHelper(value, leftInclusive, rightInclusive, paramName, true);
 
@@ -289,7 +303,8 @@ public static class Throw
         TEnum value,
         TEnum leftInclusive,
         TEnum rightInclusive,
-        [CallerArgumentExpression(nameof(value))] string? paramName = null)
+        [CallerArgumentExpression(nameof(value))]
+        string? paramName = null)
         where TEnum : struct, Enum =>
         BetweenEnumHelper(value, leftInclusive, rightInclusive, paramName, false);
 
