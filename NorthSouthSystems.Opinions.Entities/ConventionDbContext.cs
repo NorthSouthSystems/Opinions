@@ -9,6 +9,7 @@ public abstract class ConventionDbContext(DbContextOptions options)
     [
         WhiteSpaceToNullInterceptor.Singleton,
         // Unnecessary for DryRun, and the dependency chain would be non-trivial.
+        // sp.GetRequiredService<GlobalBootstrapperInterceptor>(),
         // sp.GetRequiredService<TrackCreatedUpdatedInterceptor>(),
         SaveChangesPermissionsInterceptor.Singleton
     ];

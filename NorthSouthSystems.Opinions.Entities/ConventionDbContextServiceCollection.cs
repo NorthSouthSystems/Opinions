@@ -79,6 +79,7 @@ public static class ConventionDbContextServiceCollectionExtensions
                 .AddInterceptors(
                     // Update ConventionDbContext.DryRunChanges._interceptors as Interceptors are added or removed.
                     WhiteSpaceToNullInterceptor.Singleton,
+                    sp.GetRequiredService<GlobalBootstrapperInterceptor>(),
                     sp.GetRequiredService<TrackCreatedUpdatedInterceptor>(),
                     SaveChangesPermissionsInterceptor.Singleton);
 
