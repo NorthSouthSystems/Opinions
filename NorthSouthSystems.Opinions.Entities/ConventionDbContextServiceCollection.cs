@@ -18,8 +18,6 @@ public static class ConventionDbContextServiceCollectionExtensions
     {
         Throw.IfNullOrWhiteSpace(name);
 
-        services.AddScoped<TrackCreatedUpdatedInterceptor>();
-
         services.AddTransient<IReadOnlyRepository>(ReadOnlyFactory);
         services.AddTransient(ReadOnlyFactory);
 

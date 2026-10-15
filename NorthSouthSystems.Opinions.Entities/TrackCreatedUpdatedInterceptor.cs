@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace NorthSouthSystems.Entities;
 
+[ScanRegisterScoped]
 internal sealed class TrackCreatedUpdatedInterceptor(ITrackCreatedUpdatedByProvider byProvider)
     : SaveChangesInterceptor
 {

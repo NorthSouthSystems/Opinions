@@ -7,6 +7,7 @@ namespace NorthSouthSystems.Entities;
 // to SaveChanges. There is no valid use case for doing so. Unfortunately, this interceptor only runs for SaveChanges
 // and not for sprocs. To add this precaution to sprocs, an application can do so in its implementation of
 // ITrackCreatedUpdatedByProvider. Unfortunately, that will not protect sprocs that do not take any @*By parameters.
+[ScanRegisterScoped]
 internal sealed class GlobalBootstrapperInterceptor(
     IHostEnvironment environment,
     ITrackCreatedUpdatedByProvider byProvider)
