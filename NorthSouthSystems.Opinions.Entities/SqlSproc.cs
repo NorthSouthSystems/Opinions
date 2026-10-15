@@ -30,11 +30,23 @@ public static class SqlSprocExtensions
         params SqlParameter[] parameters) =>
         Sproc(Throw.IfNull(database).ExecuteSqlRawAsync, schemaName, sprocName, parameters);
 
+    public static Task<int> ExecuteSqlSprocAsync(
+        this DatabaseFacade database,
+        string schemaName,
+        string sprocName,
+        IEnumerable<SqlParameter> parameters,
+        CancellationToken cancellationToken = default) =>
+        Sproc(
+            (sql, ps) => Throw.IfNull(database).ExecuteSqlRawAsync(sql, ps, cancellationToken),
+            schemaName,
+            sprocName,
+            parameters?.ToArray() ?? []);
+
     private static T Sproc<T>(
         Func<string, SqlParameter[], T> sqlExecutor,
         string schemaName,
         string sprocName,
-        params SqlParameter[] parameters)
+        SqlParameter[] parameters)
     {
         Throw.IfNullOrWhiteSpace(schemaName);
         Throw.IfNullOrWhiteSpace(sprocName);
