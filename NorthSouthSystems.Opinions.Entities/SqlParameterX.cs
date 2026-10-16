@@ -68,6 +68,11 @@ public static class SqlParameterX
 
     private static string CallerArgumentToParameterName(string? name)
     {
+        Throw.IfNull(name);
+
+        if (name[0] == '@')
+            name = name[1..];
+
         Throw.IfNullOrWhiteSpace(name);
 
         string[] parts = name.Split(
