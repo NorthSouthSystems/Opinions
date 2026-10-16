@@ -34,7 +34,14 @@ internal sealed class GlobalBootstrapperInterceptor(
 
     private void ThrowIfInvalid()
     {
-        if (!environment.IsEnvironment("Tests") && byProvider.CurrentId == TenantUserId.GlobalBootstrapper)
-            throw new InvalidOperationException(nameof(TenantUserId.GlobalBootstrapper) + " is only valid for Tests.");
+        if (byProvider.CurrentId == TenantUserId.GlobalBootstrapper
+            && !environment.IsDevelopment()
+            && !environment.IsEnvironment("Tests"))
+        {
+            throw new InvalidOperationException(
+                string.Create(
+                    InvariantCulture,
+                    $"{nameof(TenantUserId.GlobalBootstrapper)} is only valid in Development and Tests. Actual: {environment.EnvironmentName}"));
+        }
     }
 }
