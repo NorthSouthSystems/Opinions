@@ -64,7 +64,7 @@ public static class SqlParameterX
         ParameterDirection direction = ParameterDirection.Input,
         [CallerArgumentExpression(nameof(value))]
         string? name = null) =>
-        new(CallerArgumentToParameterName(name), value) { Direction = direction };
+        new(CallerArgumentToParameterName(name), value ?? DBNull.Value) { Direction = direction };
 
     private static string CallerArgumentToParameterName(string? name)
     {
