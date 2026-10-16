@@ -7,7 +7,7 @@ namespace NorthSouthSystems.Entities;
 internal static class IdOfT
 {
     internal static SqlParameter NewSqlParameter<T>(string parameterName, IEnumerable<T> ids) =>
-        new(parameterName, ToIdOfTRecords(ids).ToImmutableArray())
+        new(parameterName, ToIdOfTRecords(ids).ToArray()) // SqlParameter does not support ImmutableArray
         {
             SqlDbType = SqlDbType.Structured,
             TypeName = GetTypeName<T>()
