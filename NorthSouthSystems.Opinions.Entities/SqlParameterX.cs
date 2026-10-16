@@ -13,6 +13,15 @@ public static class SqlParameterX
         IdOfT.NewSqlParameter(CallerArgumentToParameterName(name), ids);
 
     public static SqlParameter CreateScalar(
+        ImmutableArray<byte>? value,
+        ParameterDirection direction = ParameterDirection.Input,
+        [CallerArgumentExpression(nameof(value))]
+        string? name = null) =>
+        direction == ParameterDirection.Input // Unfortunately, Throw.IfNotEqual does not allow enums at this time.
+            ? CreateScalar(value is { IsDefault: false } bytes ? bytes.ToArray() : null, direction, name)
+            : throw new NotSupportedException(direction.ToString());
+
+    public static SqlParameter CreateScalar(
         UInt128? value,
         ParameterDirection direction = ParameterDirection.Input,
         [CallerArgumentExpression(nameof(value))]
