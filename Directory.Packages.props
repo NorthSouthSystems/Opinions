@@ -29,7 +29,7 @@
         <PackageVersion Include="NuGet.Protocol" Version="7.9.0" />
         <PackageVersion Include="PolyType" Version="1.4.1" />
         <PackageVersion Include="Scrutor" Version="7.0.0" />
-        <PackageVersion Include="StackExchange.Redis" Version="3.4.5" />
+        <PackageVersion Include="StackExchange.Redis" Version="3.4.20" />
         <PackageVersion Include="System.IO.Hashing" Version="$(DotNetVersion)" />
         <PackageVersion Include="Vogen" Version="8.0.7" />
         <PackageVersion Include="xunit.v3" Version="4.0.2" />
