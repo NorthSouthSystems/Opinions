@@ -27,7 +27,7 @@ public static class ArgumentExceptionX
             {
                 message = new(messagePrefix);
 
-                if (!string.IsNullOrEmpty(messagePrefix) && !messagePrefix.EndsWith('\n'))
+                if (!string.IsNullOrEmpty(messagePrefix) && !messagePrefix.EndsWith('\n', StringComparison.Ordinal))
                     message.AppendLine();
             }
             else

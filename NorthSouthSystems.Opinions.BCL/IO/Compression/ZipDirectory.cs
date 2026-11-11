@@ -25,7 +25,7 @@ public sealed class ZipDirectory
 
             var workingDirectory = rootDirectory;
 
-            bool isEmptyDirectory = path.EndsWith('/');
+            bool isEmptyDirectory = path.EndsWith('/', StringComparison.Ordinal);
             string[] pathSegments = path.Split('/', StringSplitOptions.RemoveEmptyEntries);
             int childDirectoryCount = pathSegments.Length - (isEmptyDirectory ? 0 : 1);
 
