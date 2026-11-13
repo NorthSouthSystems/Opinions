@@ -40,7 +40,7 @@
         <!-- NU1102 "Unable to find package ... with version (>= [a valid version])" -->
 
         <!-- Microsoft.EntityFrameworkCore.SqlServer -->
-        <PackageVersion Include="Microsoft.Data.SqlClient" Version="7.1.1" />
+        <PackageVersion Include="Microsoft.Data.SqlClient" Version="7.1.2" />
 
         <!-- Microsoft.Data.SqlClient -->
         <!-- 9.0.18 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-2fmv-rv2c-59x7 -->
