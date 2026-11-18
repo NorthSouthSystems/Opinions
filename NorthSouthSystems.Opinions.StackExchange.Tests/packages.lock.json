@@ -43,13 +43,13 @@
       },
       "MemoryPack.Core": {
         "type": "Transitive",
-        "resolved": "1.21.4",
-        "contentHash": "6RszGorZ0ejNmp37ZcboPBMvvPCuNW2jlrdQfcs/lMzE5b3pmPF6hsm/laDc34hRlbAST1ZxaX/DvYu2DF5sBQ=="
+        "resolved": "1.22.0",
+        "contentHash": "67t5cwTs+ZZy+JlRftrxuENq/ZfzJZT+w9S/JHWamcMk1PD6/0XXb3930bgY2lNX0EziFbC42Auju7RQoT89vA=="
       },
       "MemoryPack.Generator": {
         "type": "Transitive",
-        "resolved": "1.21.4",
-        "contentHash": "g14EsSS85yn0lHTi0J9ivqlZMf09A2iI51fmI+0KkzIzyCbWOBWPi5mdaY7YWmXprk12aYh9u/qfWHQUYthlwg=="
+        "resolved": "1.22.0",
+        "contentHash": "KbpoSqEv8JDEXophjCdVNlL1JW8mEY4Z+ETp1chkTOZqJbv15TQ2KCYmSZlT80Jcw5L0wbpzaCHBCuhmrUcJqA=="
       },
       "Microsoft.ApplicationInsights": {
         "type": "Transitive",
@@ -194,7 +194,7 @@
       "northsouthsystems.opinions.stackexchange": {
         "type": "Project",
         "dependencies": {
-          "MemoryPack": "[1.21.4, )",
+          "MemoryPack": "[1.22.0, )",
           "NorthSouthSystems.Opinions.BCL": "[1.0.0, )",
           "NorthSouthSystems.Text": "[8.0.1, )",
           "morelinq": "[4.4.0, )"
@@ -202,12 +202,12 @@
       },
       "MemoryPack": {
         "type": "CentralTransitive",
-        "requested": "[1.21.4, )",
-        "resolved": "1.21.4",
-        "contentHash": "wy3JTBNBsO8LfQcBvvYsWr3lm2Oakolrfu0UQ3oSJSEiD+7ye0GUhYTaXuYYBowqsXBXWD9gf2218ae0JRiYVQ==",
+        "requested": "[1.22.0, )",
+        "resolved": "1.22.0",
+        "contentHash": "pTTDAD2q5kqk/nqzjNhhPPQ1/JRfkn5Y0m+WULAi+AEAOVWHOLTHYohUAWRLaA+8HgDjwDvUJ4pPFTNVgRG6UA==",
         "dependencies": {
-          "MemoryPack.Core": "1.21.4",
-          "MemoryPack.Generator": "1.21.4"
+          "MemoryPack.Core": "1.22.0",
+          "MemoryPack.Generator": "1.22.0"
         }
       },
       "morelinq": {
