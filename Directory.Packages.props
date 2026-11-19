@@ -27,7 +27,7 @@
         <PackageVersion Include="NuGet.Protocol" Version="8.0.0" />
         <PackageVersion Include="PolyType" Version="1.4.1" />
         <PackageVersion Include="Scrutor" Version="7.0.0" />
-        <PackageVersion Include="StackExchange.Redis" Version="3.4.31" />
+        <PackageVersion Include="StackExchange.Redis" Version="3.4.35" />
         <PackageVersion Include="System.IO.Hashing" Version="$(DotNetVersion)" />
         <!-- Verify 33+ uses SponsorCheck to "enforce" the "Open Source Maintenance Fee". There are exceptions for -->
         <!-- open source and small revenue (all of NSS current uses), but for now, we'll simply avoid those versions. -->
